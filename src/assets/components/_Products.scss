@@ -1,0 +1,96 @@
+.products-border{
+    border-bottom: 1px solid #00809a;
+    @include tablet {
+        border-bottom: none;
+    }
+}
+.products-list{
+    width: 15%;
+    @include tablet {
+        width: 100%;
+        border-bottom: 1px solid #00809a;
+    }
+}
+
+.products-card{
+    transition: all 0.5s ease-out;
+    overflow: hidden;
+    &:hover{
+        box-shadow: 6px 6px 6px rgba(133, 126, 126, 0.3);
+        transform: translateY(-10px);
+    }
+    .products-card-img{
+    height: 225px;
+    transform: scale(1, 1);
+    transition: all 0.5s ease-out;
+    &:hover {
+      transform: scale(1.15, 1.15);
+    }
+}
+}
+.cursor {
+    cursor: pointer;
+  }
+.link-primary-hover{
+    &:hover, &:focus{
+        background-color: #00809a;
+        color: white;
+        // border-radius: 10px 10px 0 0;
+        // border-radius: 10px;
+        
+    }
+    .icon-hover{
+        transition: 0.5s ease-in-out;
+    &:hover{
+        transform: rotateY(360deg);
+    }
+    }
+   
+    // .icon{
+    //     transition: 0.5s ease-in-out;
+    //     &:hover{
+    //         transform: rotateY(180deg);
+    //     }
+    // }
+    
+    
+}
+// .link-primary-hover:hover, .link-primary-hover:active{
+//     background-color: #4D8CCB;
+//     color: white;
+//     border-radius: 10px 10px 0 0;
+//     .icon{
+//         transition: 0.5s ease-in-out;
+//         &:hover{
+//             transform: rotateY(180deg);
+//         }
+//     }
+    
+    
+// }
+// .link-primary-hover span {
+//     transition: 0.5s ease-in-out;
+//     &:hover{
+//         transform: rotateY(180deg);
+//     }
+// }
+// .icon{
+//     transition: 0.5s ease-in-out;
+//     &:hover{
+//         transform: rotate(-360deg);
+//     }
+// }
+// .link-primary span:hover{
+//     transform: rotate(720deg);
+// }
+.products-banner{
+    background-image: url(https://images.unsplash.com/photo-1600633349333-eebb43d01e23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80);
+    height: 380px;
+}
+
+// .card:hover{
+//   box-shadow: 6px 6px 16px rgba(0,0,0,0.3);
+//   margin-top: 20px;
+//   transition: all 1s ease-out;
+//   overflow: hidden;
+// }

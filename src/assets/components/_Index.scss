@@ -1,0 +1,16 @@
+.banner-bg{
+    background-image: url(https://images.unsplash.com/photo-1468386150076-13c9d6fff68b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80);
+    height: 480px;
+    // max-width: 100%;
+}
+.banner-text{
+    background-color: rgba(226, 226, 226, 0.4);
+    width: 450px;
+}
+.banner-btn{
+    top:65%;
+    left: 65%;
+}
+.bg-cover{
+    @include bg-cover
+}

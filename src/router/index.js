@@ -1,0 +1,78 @@
+import { createRouter, createWebHashHistory } from 'vue-router';
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/frontend/Layout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('../views/frontend/Index.vue'),
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import('../views/frontend/About.vue'),
+      },
+      {
+        path: 'products',
+        name: 'Products',
+        component: () => import('../views/frontend/Products.vue'),
+      },
+      {
+        path: 'product/:id',
+        name: 'Product',
+        component: () => import('../views/frontend/Product.vue'),
+      },
+      {
+        path: 'carts',
+        name: 'Carts',
+        component: () => import('../views/frontend/Carts.vue'),
+      },
+      {
+        path: 'checkout',
+        name: 'Checkout',
+        component: () => import('../views/frontend/Checkout.vue'),
+      },
+      {
+        path: 'savedItems',
+        name: 'SavedItems',
+        component: () => import('../views/frontend/SavedItems.vue'),
+      },
+    ],
+  },
+  {
+    path: '/login',
+    component: () => import('../views/frontend/Login.vue'),
+  },
+  {
+    path: '/admin',
+    component: () => import('../views/backend/Dashboard.vue'),
+    children: [
+      {
+        path: 'products',
+        component: () => import('../views/backend/DashboardProducts.vue'),
+      },
+      {
+        path: 'orders',
+        component: () => import('../views/backend/DashboardOrders.vue'),
+      },
+      {
+        path: 'coupons',
+        component: () => import('../views/backend/DashboardCoupons.vue'),
+      },
+      {
+        path: 'articles',
+        component: () => import('../views/backend/DashboardArticles.vue'),
+      },
+    ],
+  },
+];
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+});
+
+export default router;
