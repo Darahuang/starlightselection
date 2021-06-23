@@ -20,7 +20,7 @@ export default {
     DashboardMenu,
   },
   created() {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)starlightselection\s*=\s*([^;]*).*$)|^.*$/, '$1');
     this.axios.defaults.headers.common.Authorization = `${token}`;
     const api = `${process.env.VUE_APP_API}/api/user/check`;
     this.axios.post(api)

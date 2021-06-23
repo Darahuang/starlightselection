@@ -177,9 +177,5 @@ export default {
       return false;
     },
   },
-//   mounted() {
-//     this.checkForm = Object.values(this.form.user);
-//     console.log(this.checkForm);
-//   },
 };
 </script>
