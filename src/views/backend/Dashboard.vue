@@ -1,13 +1,12 @@
 <template>
 <DashboardMenu></DashboardMenu>
-  <div class="container-fluid">
+  <div class="container-fluid px-5">
         <router-view v-if="check"></router-view>
   </div>
 
 </template>
 
 <script>
-import Toast from '@/sweetAlert/toast';
 import DashboardMenu from '../../components/DashboardMenu.vue';
 
 export default {
@@ -19,15 +18,16 @@ export default {
   components: {
     DashboardMenu,
   },
+  inject: ['Toast'],
   created() {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)starlightselection\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)starlightselection\s*=\s*([^;]*).*$)|^.*$/, '$1'); // 讀取token
     this.axios.defaults.headers.common.Authorization = `${token}`;
     const api = `${process.env.VUE_APP_API}/api/user/check`;
     this.axios.post(api)
       .then((res) => {
         if (res.data.success) {
           this.check = true;
-          Toast.fire({
+          this.Toast.fire({
             icon: 'success',
             title: '登入成功',
           });

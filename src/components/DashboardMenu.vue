@@ -28,23 +28,6 @@
           <a href="#" class="nav-link" @click.prevent="logout">登出</a>
         </li>
       </ul>
-      <!-- <div class="d-flex">
-        <router-link to="/carts" class="nav-link px-0 px-sm-3" @click="toggle">
-            <span class="material-icons-outlined">
-                shopping_cart
-            </span>
-        </router-link>
-        <router-link to="/savedItems" class="nav-link" href="#" @click="toggle">
-            <span class="material-icons-outlined">
-                favorite
-            </span>
-        </router-link>
-        <router-link to="/login" class="nav-link" @click="toggle">
-            <span class="material-icons-outlined">
-              account_circle
-            </span>
-        </router-link>
-      </div> -->
     </div>
   </div>
 </nav>
@@ -65,11 +48,11 @@ export default {
         this.collapse.toggle();
       }
     },
-    hide() {
-      if (window.innerWidth < 992) {
-        this.$refs.collapse.classList.toggle('show');
-      }
-    },
+    // hide() {
+    //   if (window.innerWidth < 992) {
+    //     this.$refs.collapse.classList.toggle('show');
+    //   }
+    // },
     logout() {
       const api = `${process.env.VUE_APP_API}/logout`;
       this.axios.post(api)
@@ -81,7 +64,7 @@ export default {
     },
   },
   mounted() {
-    this.hide();
+    this.$refs.collapse.classList.toggle('show');
     this.collapse = new Collapse(this.$refs.collapse);
   },
 

@@ -89,7 +89,7 @@
                         class="form-select"
                         aria-label="Default select example"
                         id="payment"
-                        v-model="payment_method"
+                        v-model="form.user.payment_method"
                         name="付款方式"
                         :class="{ 'is-invalid': errors['付款方式'] }"
                         rules="required"
@@ -129,14 +129,14 @@
               <div
                 class="d-flex justify-content-between mt-3 align-items-center"
               >
-                <a
-                  href="index.html"
+                <router-link
+                  to="/carts"
                   class="text-decoration-none btn btn-primary"
                 >
-                  回到上一頁</a
+                  回到上一頁</router-link
                 >
-                <button class="btn btn-primary" type="submit" :class="{'disabled':checkForm }">
-                    確認送出</button>
+                <button class="btn btn-primary" type="submit" :class="{'disabled':checkForm }"
+                >確認送出</button>
               </div>
             </Form>
           </div>
@@ -145,6 +145,8 @@
 </template>
 
 <script>
+import emitter from '@/methods/emitter';
+
 export default {
   data() {
     return {
@@ -154,10 +156,10 @@ export default {
           email: '',
           tel: '',
           address: '',
+          payment_method: '',
         },
         message: '',
       },
-      payment_method: '',
       payment: [
         'WebATM',
         'ATM',
@@ -169,13 +171,30 @@ export default {
       ],
     };
   },
+  methods: {
+    createOrder() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/order`;
+      this.axios.post(api, { data: this.form })
+        .then((res) => {
+          if (res.data.success) {
+            emitter.emit('emit-carts'); // 建立訂單後,購物車內容會清空,因此Menu上的購物車需要重新取得購物車
+            this.$router.push(`/payment/${res.data.orderId}`);
+          }
+        });
+    },
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/ && /^\(?(\d{2})\)?[\s\]?(\d{4})\-?(\d{4})$/ && /^[0-9]{8,10}$/;
+      return phoneNumber.test(value) ? true : '需輸入手機或家用電話';
+    },
+  },
   computed: {
     checkForm() {
-      if (this.form.user.name === '' || this.form.user.email === '' || this.form.user.tel === '' || this.form.user.address === '' || this.payment_method === '') {
+      if (this.form.user.name === '' || this.form.user.email === '' || this.form.user.tel === '' || this.form.user.address === '' || this.form.user.payment_method === '') {
         return true;
       }
       return false;
     },
   },
+
 };
 </script>

@@ -26,22 +26,29 @@
           </ol>
         </nav>
         <h1 class="fw-bold">{{product.title}}</h1>
+        <p>{{product.content}}</p>
+
+        <div class="d-flex justify-content-between">
+                  <del>{{ $filters.dollarSignThousandth(product.origin_price) }}</del>
+                  <p class="h4 text-danger">{{ $filters.dollarSignThousandth(product.price) }}</p>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import Toast from '@/sweetAlert/toast';
+// import Toast from '@/sweetAlert/toast';
 
 export default {
   data() {
     return {
       product: {},
-      id: this.$route.params.id,
+      id: '',
       isLoading: false,
     };
   },
+  inject: ['Toast'],
   methods: {
     getProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/product/${this.id}`;
@@ -51,7 +58,7 @@ export default {
           if (res.data.success) {
             this.product = res.data.product;
           } else {
-            Toast.fire({
+            this.Toast.fire({
               icon: 'error',
               title: `${res.data.message}`,
             });
@@ -64,6 +71,7 @@ export default {
   },
   created() {
     this.getProduct();
+    this.id = this.$route.params.id;
   },
 };
 </script>

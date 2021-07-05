@@ -36,6 +36,11 @@ const routes = [
         component: () => import('../views/frontend/Checkout.vue'),
       },
       {
+        path: 'payment/:id',
+        name: 'Payment',
+        component: () => import('../views/frontend/Payment.vue'),
+      },
+      {
         path: 'savedItems',
         name: 'SavedItems',
         component: () => import('../views/frontend/SavedItems.vue'),

@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap');
+
+body{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+@mixin bg-cover {
+    background-position: center;
+    background-size: cover;
+}
+
+.bg{
+    background-color: rgba(117, 172, 187, 0.1)
+}
+.ck-editor__editable_inline {
+    min-height: 300px;
+  }
+// input[type=number]::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+//     margin: 0;
+//   }
