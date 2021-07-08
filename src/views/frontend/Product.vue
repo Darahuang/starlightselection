@@ -32,6 +32,19 @@
                   <del>{{ $filters.dollarSignThousandth(product.origin_price) }}</del>
                   <p class="h4 text-danger">{{ $filters.dollarSignThousandth(product.price) }}</p>
         </div>
+        <button class="btn btn-outline-success" @click="addFavorite(product)"
+        :class="{'active' :myFavorite.includes(product.title)}"> 加入我的最愛</button>
+      </div>
+      <h5>近期商品瀏覽</h5>
+      <div class="row">
+        <template v-if="myBrowserRecord.length!==0">
+           <div class="col-lg-3" v-for="item in myBrowserRecord.slice(0,4)" :key="item.id">
+          <div class="box" >
+            <img :src="item.imageUrl" alt="" class="img-fluid">
+          </div>
+        </div>
+        </template>
+
       </div>
     </div>
   </section>
@@ -39,6 +52,22 @@
 
 <script>
 // import Toast from '@/sweetAlert/toast';
+const localStorageMethods = {
+  save(status, item) {
+    const itemString = JSON.stringify(item);
+    if (status === 'browserRecord') {
+      localStorage.setItem('browserRecord', itemString);
+    } else {
+      localStorage.setItem('favorite', itemString);
+    }
+  },
+  get(status) {
+    if (status === 'browserRecord') {
+      return JSON.parse(localStorage.getItem('browserRecord'));
+    }
+    return JSON.parse(localStorage.getItem('favorite'));
+  },
+};
 
 export default {
   data() {
@@ -46,6 +75,8 @@ export default {
       product: {},
       id: '',
       isLoading: false,
+      myFavorite: localStorageMethods.get('favorite') || [],
+      myBrowserRecord: localStorageMethods.get('browserRecord') || [],
     };
   },
   inject: ['Toast'],
@@ -57,6 +88,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.product = res.data.product;
+            this.addBrowerRecord(this.product);
           } else {
             this.Toast.fire({
               icon: 'error',
@@ -68,10 +100,46 @@ export default {
           console.log(err);
         });
     },
+    addBrowerRecord(product) {
+      if (!this.myBrowserRecord.find((item) => (item.id === product.id))) {
+        this.myBrowserRecord.push(product);
+      }
+    },
+    addFavorite(item) {
+      if (this.myFavorite.includes(item.title)) {
+        this.myFavorite.splice(this.myFavorite.indexOf(item.title), 1);
+        this.Toast.fire({
+          icon: 'warning',
+          title: `${item.title}移除我的最愛`,
+        });
+      } else {
+        this.myFavorite.push(item.title);
+        this.Toast.fire({
+          icon: 'success',
+          title: `${item.title}加入我的最愛`,
+        });
+      }
+    },
+  },
+  watch: {
+    myBrowserRecord: {
+      // 深層監聽
+      handler() {
+        localStorageMethods.save('browserRecord', this.myBrowserRecord);
+      },
+      deep: true,
+    },
+    myFavorite: {
+      // 深層監聽
+      handler() {
+        localStorageMethods.save('favorite', this.myFavorite);
+      },
+      deep: true,
+    },
   },
   created() {
-    this.getProduct();
     this.id = this.$route.params.id;
+    this.getProduct();
   },
 };
 </script>

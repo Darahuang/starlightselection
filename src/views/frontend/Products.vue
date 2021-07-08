@@ -16,7 +16,7 @@
             justify-content-center products-border
             border-primary flex-wrap"
         >
-          <li class="products-list text-center" @click.prevent="changeCategory((category = ''))">
+          <li class="products-list text-center" @click.prevent="(category = ''),(searchInput='')">
             <a
               href="#"
               class="text-decoration-none link-primary link-primary-hover
@@ -28,7 +28,7 @@
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="changeCategory((category = '亞洲'))"
+            @click.prevent="(category = '亞洲'),(searchInput='')"
           >
             <a
               href="#"
@@ -41,7 +41,7 @@
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="changeCategory((category = '歐洲'))"
+            @click.prevent="(category = '歐洲'),(searchInput='')"
           >
             <a
               href="#"
@@ -53,7 +53,7 @@
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="changeCategory((category = '美洲'))"
+            @click.prevent="(category = '美洲'),(searchInput='')"
           >
             <a
               href="#"
@@ -68,7 +68,7 @@
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="changeCategory((category = '大洋洲'))"
+            @click.prevent="(category = '大洋洲'),(searchInput='')"
           >
             <a
               href="#"
@@ -79,9 +79,14 @@
             </a>
           </li>
         </ul>
-
+         <div class="mb-3 clearfix">
+        <input type="search" class="form-control w-25 float-end" id="search"
+        placeholder="請輸入類別 ex:亞洲" v-model.lazy="searchInput" @input="(category ='')" ref="search"
+  >
+</div>
         <div class="row">
-          <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id">
+          <template v-if="filterProducts.length!==0">
+            <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id">
             <div class="card h-100 cursor products-card">
               <img :src="item.imageUrl" class="products-card-img position-relative"
               alt="..." @click="toProduct(item.id)"/>
@@ -116,6 +121,12 @@
               </div>
             </div>
           </div>
+          </template>
+          <template v-else>
+            <div>
+              <p>查無資料,請再次確認!</p>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -123,6 +134,7 @@
 </template>
 
 <script>
+
 // import Toast from '@/sweetAlert/toast';
 import emitter from '@/methods/emitter';
 
@@ -136,6 +148,7 @@ export default {
       },
       // carts: [],
       category: '',
+      searchInput: '',
     };
   },
   inject: ['Toast'],
@@ -214,12 +227,18 @@ export default {
     },
   },
   computed: {
+    // filterProducts() {
+    //   if (this.category !== '' || this.searchInput !== '') {
+    //     return this.products.filter((item) => this.category === item.category
+    //     || this.searchInput === item.category);
+    //   }
+    //   return this.products;
+    // },
     filterProducts() {
-      if (this.category !== '') {
-        return this.products.filter((item) => this.category === item.category);
-      }
-      return this.products;
+      return this.products.filter((item) => item.category.match(this.category)
+        || item.category.match(this.searchInput));
     },
+
   },
   created() {
     this.getProducts();
