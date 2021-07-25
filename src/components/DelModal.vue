@@ -8,11 +8,12 @@
         <h5 class="modal-title text-white" id="exampleModalLabel"
         v-if="item.title">刪除 {{item.title}}</h5>
         <h5 class="modal-title text-white" id="exampleModalLabel"
-        v-else>刪除訂單編號 {{item.id}}</h5>
+        v-else>刪除訂單</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <p>是否刪除 <strong class="text-danger">{{item.title}}</strong> (刪除後將無法恢復)。</p>
+       <p v-if="item.title">是否刪除 <strong class="text-danger">{{item.title}}</strong> (刪除後將無法恢復)。</p>
+         <p v-else>是否刪除 <strong class="text-danger">訂單編號 {{item.id}}</strong> (刪除後將無法恢復)。</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>

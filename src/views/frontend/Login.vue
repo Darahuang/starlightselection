@@ -35,7 +35,7 @@
               <ErrorMessage name="密碼" class="invalid-feedback"></ErrorMessage>
             </div>
             <button class="btn btn-primary col-12 rounded-pill p-2 my-3" type="submit">登入</button>
-            <router-link to="/" class="text-decoration-none">
+            <router-link to="/" class="text-decoration-none nav-link-primary">
               <span class="material-icons-outlined align-middle">
                 arrow_back
               </span>

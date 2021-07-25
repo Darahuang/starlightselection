@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent" ref="collapse">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" @click="toggle">
-          <router-link to="/admin/products" class="nav-link">產品列表</router-link>
+          <router-link to="/admin" class="nav-link">產品列表</router-link>
         </li>
         <li class="nav-item" @click="toggle">
           <router-link to="/admin/orders" class="nav-link">訂單列表</router-link>
