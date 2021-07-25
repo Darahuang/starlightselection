@@ -65,7 +65,7 @@ export default {
           if (res.data.success) {
             const { token, expired } = res.data;
             document.cookie = `starlightselection=${token};expires=${new Date(expired)};`;
-            this.$router.push('/admin/products');
+            this.$router.push('/admin');
           } else {
             this.$refs.fail.textContent = '登入失敗';
           }

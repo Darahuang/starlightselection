@@ -1,4 +1,44 @@
 .product-img{
-    height: 450px;
+    height: 470px;
     width: 100%;
+}
+.product-banner{
+    height: 300px; 
+}
+
+.product-border{
+    border-left:5px solid #009DDD ;
+    padding-left: 5px;
+}
+
+.midline::before{
+    content: "───";
+}
+.midline::after{
+    content: "───";
+}
+.random-card{
+    &:hover{
+        .random-card-overlay{
+            opacity: 1;
+        }
+        .zoomInIcon-bg{
+            opacity: 1;
+        }
+    }
+    .random-card-image{
+        height: 250px;
+        width: 100%;
+    }
+    .random-card-overlay{
+        @include card-overlay
+    }
+    .zoomInIcon-bg{
+        background-color:rgba(0,157,221,0.6);
+        border-radius: 50%;
+        height: 64px;
+        width: 64px;
+        line-height: 64px;
+        opacity: 0;
+    }
 }

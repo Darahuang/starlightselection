@@ -6,6 +6,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
     ref="modal"
+
   >
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -147,13 +148,23 @@
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label for="content" class="form-label">產品說明內容</label>
+                <label for="content" class="form-label">行程安排</label>
                 <textarea
                   class="form-control"
-                  id="content"
+                  id="itinerary "
+                  rows="7"
+                  placeholder="請輸入景點行程"
+                  v-model="tempProduct.content "
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="condition" class="form-label">成團條件</label>
+                <textarea
+                  class="form-control"
+                  id="condition"
                   rows="3"
-                  placeholder="請輸入產品說明內容"
-                  v-model="tempProduct.content"
+                  placeholder="請輸入成團條件"
+                  v-model="tempProduct.condition"
                 ></textarea>
               </div>
               <div class="form-check">

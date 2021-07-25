@@ -60,8 +60,8 @@
             />
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=""
-            id="is_enabled" v-model="tempCoupon.is_enabled"
+            <input class="form-check-input" type="checkbox"
+            id="is_enabled" v-model.number="tempCoupon.is_enabled"
             :true-value="1"
             :false-value="0"/>
             <label class="form-check-label" for="is_enabled">
@@ -103,7 +103,10 @@ export default {
   },
   watch: {
     coupon() {
-      this.tempCoupon = this.coupon;
+      this.tempCoupon = {
+        ...this.coupon,
+        is_enabled: this.coupon.is_enabled || false,
+      };
       // 時間格式為YYYY-MM-DD
       const dateAndTime = new Date(this.tempCoupon.due_date * 1000).toISOString().split('T');
       [this.due_date] = dateAndTime;

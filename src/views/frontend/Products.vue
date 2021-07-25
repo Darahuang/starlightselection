@@ -6,34 +6,36 @@
       <span id="bubblingG_3"> </span>
     </div>
   </loading>
-  <div class="container-fluid products-banner bg-cover"></div>
-  <section class="container ">
-    <h2 class="text-center text-primary fw-bold h1 my-5">產品列表</h2>
+  <div class="container-fluid products-banner-bg bg-cover"></div>
+  <section class="container py-5">
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <ul
-          class="d-flex list-unstyled justify-content-md-evenly
+          class="d-flex list-unstyled justify-content-md-between
             justify-content-center products-border
-            border-primary flex-wrap"
+             flex-wrap"
         >
-          <li class="products-list text-center" @click.prevent="(category = ''),(searchInput='')">
+          <li
+            class="products-list text-center"
+          >
             <a
               href="#"
-              class="text-decoration-none link-primary link-primary-hover
-                h3  d-block mb-0 py-2"
+              class="text-decoration-none link-primary-hover link-dark
+                h3 d-block mb-0 py-2"
+              @click.prevent="(category = ''), (searchInput = '')"
             >
-              <span class="material-icons-outlined categoryIcon-hover">travel_explore</span>
+              <span class="material-icons-outlined categoryIcon-hover ">travel_explore</span>
               全部
             </a>
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="(category = '亞洲'),(searchInput='')"
           >
             <a
               href="#"
-              class="text-decoration-none link-primary link-primary-hover
+              class="text-decoration-none link-dark link-primary-hover
                 h3  d-block mb-0 py-2"
+              @click.prevent="(category = '亞洲'), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover"> festival </span>
               亞洲</a
@@ -41,24 +43,24 @@
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="(category = '歐洲'),(searchInput='')"
           >
             <a
               href="#"
-              class="text-decoration-none link-primary link-primary-hover
+              class="text-decoration-none link-dark link-primary-hover
                 h3 mb-0 py-2 d-block "
+              @click.prevent="(category = '歐洲'), (searchInput = '')"
             >
-              <span class="material-icons-outlined categoryIcon-hover"> gite </span>歐洲
+              <span class="material-icons-outlined categoryIcon-hover"> gite </span> 歐洲
             </a>
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="(category = '美洲'),(searchInput='')"
           >
             <a
               href="#"
-              class="text-decoration-none link-primary link-primary-hover
+              class="text-decoration-none link-dark link-primary-hover
                 h3 mb-0 py-2 d-block"
+              @click.prevent="(category = '美洲'), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover">
                 luggage
@@ -68,44 +70,103 @@
           </li>
           <li
             class="products-list text-center"
-            @click.prevent="(category = '大洋洲'),(searchInput='')"
           >
             <a
               href="#"
-              class="text-decoration-none link-primary link-primary-hover
+              class="text-decoration-none link-dark link-primary-hover
                 h3 mb-0 py-2 d-block"
+              @click.prevent="(category = '大洋洲'), (searchInput = '')"
             >
-              <span class="material-icons-outlined categoryIcon-hover"> sailing </span>大洋洲
+              <span class="material-icons-outlined categoryIcon-hover"> sailing </span>
+                大洋洲
             </a>
           </li>
         </ul>
-         <div class="mb-3 clearfix">
-        <input type="search" class="form-control w-25 float-end" id="search"
-        placeholder="請輸入類別 ex:亞洲" v-model.lazy="searchInput" @input="(category ='')" ref="search"
-  >
-</div>
-        <div class="row">
-          <template v-if="filterProducts.length!==0">
-            <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id">
-            <div class="card h-100 cursor products-card">
-              <img :src="item.imageUrl" class="products-card-img position-relative"
-              alt="..." @click="toProduct(item.id)"/>
-              <span class="material-icons-outlined text-danger
-              FavoriteIcon-position" @click="addToFavorite">
-                favorite_border
-              </span>
-              <div class="card-body" @click="toProduct(item.id)">
-                <h2 class="card-title h4">{{ item.title }}</h2>
-                <span class="badge bg-primary">{{ item.category }}</span>
-                <p class="card-text">{{ item.content }}</p>
-                <div class="d-flex justify-content-between">
-                  <del>{{ $filters.dollarSignThousandth(item.origin_price) }}</del>
-                  <p class="h4 text-danger">{{ $filters.dollarSignThousandth(item.price) }}</p>
+        <div class="mb-3 clearfix">
+          <input
+            type="search"
+            class="form-control w-25 float-end"
+            id="search"
+            placeholder="請輸入類別 ex:亞洲"
+            v-model.lazy="searchInput"
+            @input="category = ''"
+          />
+        </div>
+        <div class="row" v-if="filterProducts.length !== 0">
+          <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id">
+            <div class="card h-100 cursor products-card border-0 shadow-sm">
+              <div class="overflow-hidden position-relative">
+                <img
+                  :src="item.imageUrl"
+                  class="products-card-img"
+                  alt="..."
+                  @click="toProduct(item.id)"
+                />
+                <!-- 手機以上的hover效果 -->
+                <ul
+                  class="social-icon justify-content-center text-center list-unstyled
+                d-none d-sm-flex"
+                >
+                  <li >
+                    <a href="#" class="link-dark"
+                    @click.prevent="addToFavorite(item)">
+                      <span
+                      class="material-icons-outlined text-danger icon fs-3"
+                      v-if="myFavorite.find(el => el.title === item.title)"
+                    >
+                      favorite
+                    </span>
+                    <span class="material-icons-outlined icon fs-3" v-else>
+                      favorite_border
+                    </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="link-dark" @click.prevent="addToCart(item.id)">
+                    <span class="material-icons-outlined icon fs-3">
+                      shopping_cart
+                    </span>
+                  </a>
+                  </li>
+                  <li>
+                    <a href="#" class="link-dark" @click.prevent="toProduct(item.id)">
+                    <span class="material-icons-outlined icon fs-3">
+                      zoom_in
+                    </span>
+                  </a>
+                  </li>
+                </ul>
+
+                 <!-- 手機以下我的最愛樣式 -->
+                <div
+                  class="favoriteIcon-position favoriteIcon-bg p-2 d-block d-sm-none"
+                  @click="addToFavorite(item)"
+                >
+                  <span
+                    class="material-icons-outlined text-danger align-middle"
+                    v-if="myFavorite.find(el => el.title === item.title)"
+                  >
+                    favorite
+                  </span>
+                  <span class="material-icons-outlined text-danger align-middle" v-else>
+                    favorite_border
+                  </span>
                 </div>
               </div>
-              <div class="mt-2">
+
+              <span class="badge bg-secondary badge-position px-3 py-2 z-index">
+                {{ item.category }}</span
+              >
+              <div class="card-body text-center" @click="toProduct(item.id)">
+                <h2 class="card-title h4">{{ item.title }}</h2>
+                <p class="card-text">{{ item.description }}</p>
+                <p class="h5 text-danger">{{ $filters.dollarSignThousandth(item.price) }}</p>
+              </div>
+
+              <!-- 手機以下加入購物車樣式 -->
+              <div class="mt-2 text-center d-block d-sm-none">
                 <button
-                  class="btn btn-primary rounded-0 col-12 p-2"
+                  class="btn btn-slide-right col-6 p-2 border-0"
                   @click="addToCart(item.id)"
                   :disabled="loadingStatus.loadingItem === item.id"
                 >
@@ -116,17 +177,16 @@
                   >
                     <span class="visually-hidden">Loading...</span>
                   </div>
-                  加入購物車
+                  立即報名
                 </button>
               </div>
             </div>
           </div>
-          </template>
-          <template v-else>
-            <div>
-              <p>查無資料,請再次確認!</p>
-            </div>
-          </template>
+        </div>
+
+        <div v-else class="d-flex justify-content-center align-items-center">
+          <div class="search-img"></div>
+          <p class="fw-bold">查無資料,請再次確認!</p>
         </div>
       </div>
     </div>
@@ -134,10 +194,17 @@
 </template>
 
 <script>
-
-// import Toast from '@/sweetAlert/toast';
 import emitter from '@/methods/emitter';
 
+const localStorageMethods = {
+  save(item) {
+    const itemString = JSON.stringify(item);
+    localStorage.setItem('favorite', itemString);
+  },
+  get() {
+    return JSON.parse(localStorage.getItem('favorite'));
+  },
+};
 export default {
   data() {
     return {
@@ -146,6 +213,7 @@ export default {
       loadingStatus: {
         loadingItem: '',
       },
+      myFavorite: localStorageMethods.get() || [],
       // carts: [],
       category: '',
       searchInput: '',
@@ -175,6 +243,7 @@ export default {
     },
     addToCart(id, qty = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/cart`;
+      this.isLoading = true;
       this.loadingStatus.loadingItem = id;
       const cart = {
         product_id: id,
@@ -186,7 +255,6 @@ export default {
           if (res.data.success) {
             this.loadingStatus.loadingItem = '';
             emitter.emit('emit-carts');
-            // this.getCarts();
             this.Toast.fire({
               icon: 'success',
               title: `${res.data.message}`,
@@ -197,52 +265,60 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.isLoading = false;
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法報名，請再次確認!',
+          });
+          this.isLoading = false;
+          this.loadingStatus.loadingItem = '';
         });
     },
-    // getCarts() {
-    //   const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/cart`;
-    //   this.isLoading = true;
-    //   this.axios
-    //     .get(api)
-    //     .then((res) => {
-    //       if (res.data.success) {
-    //         this.carts = res.data;
-    //       } else {
-    //         this.Toast.fire({
-    //           icon: 'error',
-    //           title: `${res.data.message}`,
-    //         });
-    //       }
-    //       this.isLoading = false;
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
+    addToFavorite(favoriteItem) {
+      const favIndex = this.myFavorite.findIndex((item) => item.id === favoriteItem.id);
+      if (favIndex === -1) {
+        this.myFavorite.push(favoriteItem);
+
+        this.Toast.fire({
+          icon: 'success',
+          title: `${favoriteItem.title}加入我的最愛`,
+        });
+      } else {
+        this.myFavorite.splice(favIndex, 1);
+
+        this.Toast.fire({
+          icon: 'warning',
+          title: `${favoriteItem.title}從我的最愛移出`,
+        });
+      }
+    },
     toProduct(id) {
       this.$router.push(`/product/${id}`);
     },
   },
   computed: {
-    // filterProducts() {
-    //   if (this.category !== '' || this.searchInput !== '') {
-    //     return this.products.filter((item) => this.category === item.category
-    //     || this.searchInput === item.category);
-    //   }
-    //   return this.products;
-    // },
     filterProducts() {
-      return this.products.filter((item) => item.category.match(this.category)
-        || item.category.match(this.searchInput));
+      if (this.category !== '' || this.searchInput !== '') {
+        return this.products.filter(
+          (item) => this.category === item.category || this.searchInput === item.category,
+        );
+      }
+      return this.products;
     },
-
+  },
+  watch: {
+    myFavorite: {
+      handler() {
+        localStorageMethods.save(this.myFavorite);
+        emitter.emit('emit-myFavorite');
+      },
+      deep: true,
+    },
   },
   created() {
     this.getProducts();
-    // this.getCarts();
   },
 };
 </script>

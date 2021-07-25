@@ -184,7 +184,7 @@ export default {
       const dateAndTime = new Date(this.tempArticle.create_at * 1000).toISOString().split('T');
       [this.create_at] = dateAndTime;
     },
-    due_date() {
+    create_at() {
       this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
     },
   },

@@ -6,65 +6,154 @@
       <span id="bubblingG_3"> </span>
     </div>
   </loading>
+  <section
+    class="container-fluid product-banner-bg bg-cover"
+    :style="{ backgroundImage: `url(${product.imageUrl})` }"
+  ></section>
   <section class="container my-5">
     <div class="row">
-      <div class="col-lg-7 mt-5 mb-3">
-        <img :src="product.imageUrl" class="product-img bg-cover" alt="" />
+      <div class="col-md-7 d-none d-md-block">
+        <img :src="product.imageUrl" class="product-img img-cover" alt="" />
       </div>
-      <div class="col-lg-5">
+      <div class="col-md-5">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <router-link to="/" class="text-decoration-none link-primary">
-                首頁</router-link>
+              <router-link to="/" class="text-decoration-none link-primary"> 首頁</router-link>
             </li>
-           <li class="breadcrumb-item">
-                <router-link to="/products" class="text-decoration-none link-primary">
-                行程列表</router-link>
+            <li class="breadcrumb-item">
+              <router-link to="/products" class="text-decoration-none link-primary">
+                行程列表</router-link
+              >
             </li>
-            <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
           </ol>
         </nav>
-        <h1 class="fw-bold">{{product.title}}</h1>
-        <p>{{product.content}}</p>
-
-        <div class="d-flex justify-content-between">
-                  <del>{{ $filters.dollarSignThousandth(product.origin_price) }}</del>
-                  <p class="h4 text-danger">{{ $filters.dollarSignThousandth(product.price) }}</p>
+        <div class="card p-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="fw-bold h1">{{ product.title }}</h2>
+            <div class="cursor py-2" @click="addToFavorite(product)">
+              <span
+                class="material-icons-outlined text-danger align-middle fs-2"
+                v-if="myFavorite.find(el => el.title === product.title)"
+              >
+                favorite
+              </span>
+              <span class="material-icons-outlined text-danger align-middle fs-2" v-else>
+                favorite_border
+              </span>
+            </div>
+          </div>
+          <p class="h5">{{ product.description }}</p>
+          <div>
+            <p class="white-space mt-3">{{ product.condition }}</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-2" v-if="product.price">
+            <del class="text-muted"> {{ $filters.dollarSignThousandth(product.origin_price) }}</del>
+            <p class="h5 text-danger fw-bold">
+              {{ $filters.dollarSignThousandth(product.price) }}
+            </p>
+          </div>
+          <hr class="border-top my-2" />
+          <form class="row mt-3">
+            <div class="col-lg-6">
+              <div class="input-group input-group-sm mb-3">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  @click="qty -= 1"
+                  :class="{ disabled: qty <= 1 }"
+                >
+                  <span class="material-icons-outlined align-middle">
+                    remove
+                  </span>
+                </button>
+                <input
+                  type="number"
+                  class="form-control text-center"
+                  placeholder=""
+                  aria-label="Example text with two button addons"
+                  min="1"
+                  v-model.number="qty"
+                />
+                <button class="btn btn-outline-secondary" type="button" @click="qty += 1">
+                  <span class="material-icons-outlined align-middle">
+                    add
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-6 text-end">
+              <p class="h5 lh-base" v-if="product.price">
+                <span class="h6">總額</span>
+                {{ $filters.dollarSignThousandth(qty * product.price) }}
+              </p>
+            </div>
+            <div class="col-md-12 ">
+              <button
+                class="btn btn-slide-right w-100 p-2 border-0"
+                type="button"
+                @click="addToCart(product.id, qty)"
+              >
+                立即報名
+              </button>
+            </div>
+          </form>
         </div>
-        <button class="btn btn-outline-success" @click="addFavorite(product)"
-        :class="{'active' :myFavorite.includes(product.title)}"> 加入我的最愛</button>
       </div>
-      <h5>近期商品瀏覽</h5>
+
       <div class="row">
-        <template v-if="myBrowserRecord.length!==0">
-           <div class="col-lg-3" v-for="item in myBrowserRecord.slice(0,4)" :key="item.id">
-          <div class="box" >
-            <img :src="item.imageUrl" alt="" class="img-fluid">
+        <div class="col">
+          <div class="mt-5">
+            <h2 class="text-center midline">行程特色</h2>
+            <div v-html="product.content"></div>
           </div>
         </div>
-        </template>
-
+      </div>
+    </div>
+  </section>
+  <section class="container mt-5">
+    <h2 class="text-center mb-5 midline">猜您喜歡</h2>
+    <div class="row ">
+      <div class="col-md-3 mt-3" v-for="item in relatedProducts.slice(0, 4)" :key="item.id">
+        <div class="random-card cursor shadow-sm" @click="toProduct(item.id)">
+          <div class="position-relative">
+            <img :src="item.imageUrl" class="random-card-image " alt="" srcset="" />
+            <div
+              class="random-card-overlay d-flex justify-content-center align-items-center
+            "
+            >
+              <!-- 手機以上的hover效果 -->
+              <div class="zoomInIcon-bg text-center d-none d-sm-block">
+                <span class="material-icons-outlined text-white fs-1 align-middle">
+                  zoom_in
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <h3 class="h4 text-primary">{{ item.title }}</h3>
+            <p>{{ $filters.dollarSignThousandth(item.price) }}</p>
+            <!-- 手機以下的查看更多的樣式 -->
+            <button class="btn btn-primary d-sm-none " type="button" @click="toProduct(item.id)">
+              查看更多
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-// import Toast from '@/sweetAlert/toast';
+import emitter from '@/methods/emitter';
+
 const localStorageMethods = {
-  save(status, item) {
+  save(item) {
     const itemString = JSON.stringify(item);
-    if (status === 'browserRecord') {
-      localStorage.setItem('browserRecord', itemString);
-    } else {
-      localStorage.setItem('favorite', itemString);
-    }
+    localStorage.setItem('favorite', itemString);
   },
-  get(status) {
-    if (status === 'browserRecord') {
-      return JSON.parse(localStorage.getItem('browserRecord'));
-    }
+  get() {
     return JSON.parse(localStorage.getItem('favorite'));
   },
 };
@@ -72,23 +161,47 @@ const localStorageMethods = {
 export default {
   data() {
     return {
+      products: [],
       product: {},
+      qty: 1,
       id: '',
       isLoading: false,
       myFavorite: localStorageMethods.get('favorite') || [],
-      myBrowserRecord: localStorageMethods.get('browserRecord') || [],
     };
   },
   inject: ['Toast'],
   methods: {
-    getProduct() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/product/${this.id}`;
+    getProduct(id) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/product/${id}`;
+      this.isLoading = true;
       this.axios
         .get(api)
         .then((res) => {
           if (res.data.success) {
             this.product = res.data.product;
-            this.addBrowerRecord(this.product);
+          } else {
+            this.Toast.fire({
+              icon: 'error',
+              title: `${res.data.message}`,
+            });
+          }
+          this.goTop();
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得資料，請再次確認!',
+          });
+          this.isLoading = false;
+        });
+    },
+    getProducts() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/products/all`;
+      this.axios.get(api)
+        .then((res) => {
+          if (res.data.success) {
+            this.products = res.data.products;
           } else {
             this.Toast.fire({
               icon: 'error',
@@ -96,50 +209,102 @@ export default {
             });
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得資料，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
-    addBrowerRecord(product) {
-      if (!this.myBrowserRecord.find((item) => (item.id === product.id))) {
-        this.myBrowserRecord.push(product);
-      }
-    },
-    addFavorite(item) {
-      if (this.myFavorite.includes(item.title)) {
-        this.myFavorite.splice(this.myFavorite.indexOf(item.title), 1);
-        this.Toast.fire({
-          icon: 'warning',
-          title: `${item.title}移除我的最愛`,
-        });
-      } else {
-        this.myFavorite.push(item.title);
+    addToFavorite(favoriteItem) {
+      const favIndex = this.myFavorite.findIndex((item) => favoriteItem.id === item.id);
+      if (favIndex === -1) {
+        this.myFavorite.push(favoriteItem);
         this.Toast.fire({
           icon: 'success',
-          title: `${item.title}加入我的最愛`,
+          title: `${favoriteItem.title}加入收藏清單`,
+        });
+      } else {
+        this.myFavorite.splice(favIndex, 1);
+        this.Toast.fire({
+          icon: 'warning',
+          title: `${favoriteItem.title}從收藏清單移出`,
         });
       }
+    },
+    addToCart(id, qty) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/cart`;
+      const cart = {
+        product_id: id,
+        qty,
+      };
+      this.isLoading = true;
+      this.axios.post(api, { data: cart })
+        .then((res) => {
+          if (res.data.success) {
+            emitter.emit('emit-carts');
+            this.Toast.fire({
+              icon: 'success',
+              title: `${res.data.message}`,
+            });
+          } else {
+            this.Toast.fire({
+              icon: 'error',
+              title: `${res.data.message}`,
+            });
+          }
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法報名，請再次確認!',
+          });
+        });
+    },
+    toProduct(id) {
+      this.$router.push(`/product/${id}`);
+    },
+    goTop() {
+      if (window.pageYOffset > 100) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+    },
+  },
+  computed: {
+    relatedProducts() {
+      let relatedAry = [];
+      relatedAry = this.products.filter(
+        (item) => item.category === this.product.category && item.id !== this.product.id,
+      );
+      relatedAry.sort(() => Math.random() - 0.5);
+      return relatedAry;
     },
   },
   watch: {
-    myBrowserRecord: {
-      // 深層監聽
-      handler() {
-        localStorageMethods.save('browserRecord', this.myBrowserRecord);
-      },
-      deep: true,
-    },
     myFavorite: {
       // 深層監聽
       handler() {
-        localStorageMethods.save('favorite', this.myFavorite);
+        localStorageMethods.save(this.myFavorite);
+        emitter.emit('emit-myFavorite');
       },
       deep: true,
     },
   },
+  // 如果使用動態路由切換頁面在同一元件上,不會重新渲染元件,使用下列解決方法
+  beforeRouteUpdate(to, from) {
+    if (to.fullPath !== from.fullPath) {
+      this.getProduct(to.params.id);
+    }
+  },
   created() {
     this.id = this.$route.params.id;
-    this.getProduct();
+    this.getProduct(this.id);
+    this.getProducts();
   },
 };
 </script>

@@ -48,16 +48,12 @@ export default {
         this.collapse.toggle();
       }
     },
-    // hide() {
-    //   if (window.innerWidth < 992) {
-    //     this.$refs.collapse.classList.toggle('show');
-    //   }
-    // },
     logout() {
       const api = `${process.env.VUE_APP_API}/logout`;
       this.axios.post(api)
         .then((res) => {
           if (res.data.success) {
+            document.cookie = 'starlightselection = ; expires = ; path=/';
             this.$router.push('/');
           }
         });

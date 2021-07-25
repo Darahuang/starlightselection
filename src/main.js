@@ -11,6 +11,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+
 import { date, dollarSignThousandth } from './methods/filters';
 import App from './App.vue';
 import router from './router';

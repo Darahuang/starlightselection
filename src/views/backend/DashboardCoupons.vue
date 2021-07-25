@@ -22,8 +22,8 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>名稱</th>
-          <th>優惠碼</th>
+          <th class="d-none d-sm-table-cell">名稱</th>
+          <th class="d-none d-sm-table-cell">優惠碼</th>
           <th>折扣百分比</th>
           <th>到期日</th>
           <th>是否啟用</th>
@@ -32,8 +32,8 @@
       </thead>
       <tbody>
         <tr v-for="item in coupons" :key="item.id">
-          <th>{{ item.title }}</th>
-          <td>{{ item.code }}</td>
+          <td class="d-none d-sm-table-cell">{{ item.title }}</td>
+          <td class="d-none d-sm-table-cell">{{ item.code }}</td>
           <td>{{ item.percent }}</td>
           <td>{{ $filters.date(item.due_date) }}</td>
           <td>{{ item.is_enabled === 1 ? "啟用" : "未啟用" }}</td>
@@ -95,6 +95,13 @@ export default {
             });
           }
           this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得優惠碼，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     openModal(status, item) {
@@ -138,6 +145,13 @@ export default {
             });
           }
           this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法更新優惠碼，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     deleteCoupon() {
@@ -158,6 +172,13 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法刪除優惠碼，請再次確認!',
+          });
           this.isLoading = false;
         });
     },

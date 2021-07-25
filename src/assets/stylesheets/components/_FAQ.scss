@@ -1,0 +1,26 @@
+.accordion-header{
+    .accordion-button-notCollaped {
+      background-color: white;
+      color: #494846;
+    }
+    .accordion-button-focus:focus{
+        box-shadow:0 0 0 0.25rem  rgba(11, 168, 241, 0.25);
+    }
+    .questions-list{
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        background-color: #009DDD;
+        color: #ffff;
+        border-radius: .25rem;
+        text-align: center;
+        line-height: 2rem;
+    }
+    
+  }
+
+  .faq-bg{
+    background-image: url(https://images.pexels.com/photos/5428829/pexels-photo-5428829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    height: 380px;
+    background-attachment: fixed;
+  }

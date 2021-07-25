@@ -11,19 +11,19 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>購買時間</th>
-          <th>Email</th>
-          <th>購買款項</th>
+          <th class="d-none d-sm-table-cell">購買時間</th>
+          <th class="d-none d-sm-table-cell">Email</th>
+          <th>購買品項</th>
           <th>應付金額</th>
-          <th>是否付款</th>
+          <th class="d-none d-sm-table-cell">是否付款</th>
           <th>編輯</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in orders" :key="item.id" :class="{'text-muted':!item.is_paid}">
-          <th>{{ $filters.date(item.create_at) }}</th>
-          <td>{{ item.user.email }}</td>
-          <td>
+          <td class="d-none d-sm-table-cell">{{ $filters.date(item.create_at) }}</td>
+          <td class="d-none d-sm-table-cell">{{ item.user.email }}</td>
+          <td >
             <ul class="list-unstyled mb-0">
               <li v-for="product in item.products" :key="product.id" class="mb-1">
                 {{ product.product.title }} 人數: {{ product.qty }} {{ product.product.unit }}
@@ -31,7 +31,7 @@
             </ul>
           </td>
           <td>{{ $filters.dollarSignThousandth(item.total) }}</td>
-          <td>
+          <td class="d-none d-sm-table-cell">
             <div class="form-check form-switch" >
               <input class="form-check-input" type="checkbox" :id="item.id"
               v-model="item.is_paid"
@@ -98,6 +98,13 @@ export default {
             });
           }
           this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得訂單，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     updateOrder(item) {
@@ -121,6 +128,13 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法更新訂單，請再次確認!',
+          });
           this.isLoading = false;
         });
     },
@@ -151,6 +165,13 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法刪除訂單，請再次確認!',
+          });
           this.isLoading = false;
         });
     },

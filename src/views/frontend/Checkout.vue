@@ -1,6 +1,6 @@
 <template>
-   <section class="container my-5 py-5 bg">
-        <h2 class="text-center">填寫資料</h2>
+   <section class="container my-5 py-5 bg-primary-light">
+        <h2 class="text-center h1 mb-4">填寫資料</h2>
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <Form @submit="createOrder" v-slot="{errors}">
@@ -123,9 +123,7 @@
                   </div>
                   <span class="text-danger">*為必填欄位</span>
                 </div>
-
               </div>
-
               <div
                 class="d-flex justify-content-between mt-3 align-items-center"
               >
@@ -180,6 +178,13 @@ export default {
             emitter.emit('emit-carts'); // 建立訂單後,購物車內容會清空,因此Menu上的購物車需要重新取得購物車
             this.$router.push(`/payment/${res.data.orderId}`);
           }
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法建立訂單，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     isPhone(value) {

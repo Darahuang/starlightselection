@@ -1,105 +1,106 @@
-.products-border{
-    border-bottom: 1px solid #00809a;
-    @include tablet {
-        border-bottom: none;
-    }
-}
-.products-list{
-    width: 15%;
-    @include tablet {
-        width: 100%;
-        border-bottom: 1px solid #00809a;
-    }
-}
-
-.products-card{
-    transition: all 0.5s ease-out;
-    overflow: hidden;
-    &:hover{
-        box-shadow: 6px 6px 6px rgba(133, 126, 126, 0.3);
-        transform: translateY(-10px);
-    }
-    .products-card-img{
-    height: 225px;
-    width: 100%;
-    transform: scale(1, 1);
-    transition: all 0.5s ease-out;
-    &:hover {
-      transform: scale(1.15, 1.15);
-    }
-    
-    
-    }
-.FavoriteIcon-position{
-    position: absolute;
-    top:10px;
-    right: 10px;
-
-}
-}
-.cursor {
-    cursor: pointer;
-  }
-.link-primary-hover{
-    &:hover, &:focus, &:active{
-        background-color: #00809a;
-        color: white;
-        // border-radius: 10px 10px 0 0;
-        // border-radius: 10px;
-        
-    }
-    .categoryIcon-hover{
-        transition: 0.5s ease-in-out;
-    &:hover{
-        transform: rotateY(360deg);
-    }
-    }
-   
-    // .icon{
-    //     transition: 0.5s ease-in-out;
-    //     &:hover{
-    //         transform: rotateY(180deg);
-    //     }
-    // }
-    
-    
-}
-// .link-primary-hover:hover, .link-primary-hover:active{
-//     background-color: #4D8CCB;
-//     color: white;
-//     border-radius: 10px 10px 0 0;
-//     .icon{
-//         transition: 0.5s ease-in-out;
-//         &:hover{
-//             transform: rotateY(180deg);
-//         }
-//     }
-    
-    
-// }
-// .link-primary-hover span {
-//     transition: 0.5s ease-in-out;
-//     &:hover{
-//         transform: rotateY(180deg);
-//     }
-// }
-// .icon{
-//     transition: 0.5s ease-in-out;
-//     &:hover{
-//         transform: rotate(-360deg);
-//     }
-// }
-// .link-primary span:hover{
-//     transform: rotate(720deg);
-// }
-.products-banner{
+.products-banner-bg {
     background-image: url(https://images.unsplash.com/photo-1600633349333-eebb43d01e23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80);
-    height: 380px;
+    height: 350px;
+    @include tablet {
+      height: 250px;
+    }
+  }
+
+.products-border {
+  border-bottom: 1px solid $gray-400;
+  @include tablet {
+    border-bottom: none;
+  }
+}
+.products-list {
+  @include tablet {
+    width: 100%;
+    border-bottom: 1px solid $gray-400;
+  }
+  .link-primary-hover {
+    padding: 0.5rem 1rem;
+    border-bottom: 3px solid transparent;
+    @include tablet {
+      border-bottom: none;
+    }
+    &:focus,
+    &:hover {
+      border-bottom: 3px solid #009ddd;
+      color: #009ddd;
+      @include tablet {
+        background-color: #009ddd;
+        color: white;
+        border-bottom: none;
+      }
+      .categoryIcon-hover {
+        transform: rotateY(180deg);
+      }
+    }
+    .categoryIcon-hover {
+      transition: 0.5s ease-in-out;
+    }
+  }
 }
 
-// .card:hover{
-//   box-shadow: 6px 6px 16px rgba(0,0,0,0.3);
-//   margin-top: 20px;
-//   transition: all 1s ease-out;
-//   overflow: hidden;
-// }
+.products-card {
+  &:hover {
+    .products-card-img {
+      transform: scale(1, 1);
+    }
+    .social-icon {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .products-card-img {
+    height: 270px;
+    width: 100%;
+    @include card-image-zoom-out;
+  }
+  .badge-position {
+    position: absolute;
+    top: 255px;
+    left: 10px;
+  }
+  .favoriteIcon-position {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .favoriteIcon-bg {
+    background-color: rgba(255, 255, 255, 0.616);
+    border-radius: 50%;
+  }
+  .social-icon {
+    transition: all 0.2s ease-out 0s;
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    bottom: 20px;
+    .icon {
+      transition: all 0.5s ease-out 0s;
+      background: #fff;
+      width: 64px;
+      height: 50px;
+      line-height: 50px;
+      &:hover {
+        background: #009ddd;
+        color: #ffff;
+      }
+    }
+  }
+}
+
+
+.search-img {
+  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1627184523170.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=O8t1aIvSzjShiC9lTLEOeJEblklzkiiGodwRP3Wt5MBnQUX4B0m68em%2BbDmufxoMcoV%2FDGkM%2BRdNBRc%2Bi2giLt5XA6izeXo2KwBTZBP48ZpQDuekhA272wv5pxeIIr3xTX1Qr1DPNGoX7CNfdP5gtZrXmNOAPuPgXEV9j%2BTyijce5649kDT%2FhiLY0mrlGmYL898TMq%2FLZvPMDZjB2c1t7ou1mh9ssyYO2WMY8YX%2B9veITf%2BfoP5ni3BuUn9v0jqwjzgWDIvnvPCw7BJJU6whR8zzwglartQdQGPNJCv7Me%2FCRvgG9wqxk%2B4SZpxaTepn1JUHGWTrHaPrC06NjWJuFw%3D%3D);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 180px;
+}
+
+

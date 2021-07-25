@@ -16,31 +16,33 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th style="width:120px">分類</th>
-          <th>產品名稱</th>
-          <th style="width:120px">原價</th>
-          <th style="width:120px">售價</th>
-          <th style="width:120px">是否啟用</th>
-          <th style="width:200px">編輯</th>
+          <th style="width: 120px">分類</th>
+          <th style="width: 400px">產品名稱</th>
+          <th  class="d-none d-sm-table-cell" style="width: 150px">原價</th>
+          <th style="width: 150px">售價</th>
+          <th  class="d-none d-sm-table-cell" style="width: 150px">是否啟用</th>
+          <th style="width: 150px">編輯</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in products" :key="item.id">
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
-          <td>{{ $filters.dollarSignThousandth(item.origin_price) }}</td>
+          <td class="d-none d-sm-table-cell">
+            {{ $filters.dollarSignThousandth(item.origin_price) }}</td>
           <td>{{ $filters.dollarSignThousandth(item.price) }}</td>
-          <td>
+          <td class="d-none d-sm-table-cell">
             <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
             <span v-else>未啟用</span>
           </td>
           <td>
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-              <button type="button" class="btn btn-outline-primary"
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary btn-sm"
               @click="openModal('edit', item)">編輯</button>
-              <button type="button" class="btn btn-outline-danger"
+              <button type="button" class="btn btn-outline-danger btn-sm"
               @click="openModal('delete', item)">刪除</button>
-            </div>
+              </div>
+
           </td>
         </tr>
       </tbody>
@@ -93,8 +95,12 @@ export default {
           }
           this.isLoading = false;
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得產品，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     openModal(status, item) {
@@ -136,6 +142,13 @@ export default {
             });
           }
           this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法更新產品，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     deleteProduct() {
@@ -156,6 +169,13 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法刪除產品，請再次確認!',
+          });
           this.isLoading = false;
         });
     },

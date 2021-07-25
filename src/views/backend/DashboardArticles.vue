@@ -23,8 +23,8 @@
         <tr>
           <th style="width: 150px">標題</th>
           <th style="width: 150px">作者</th>
-          <th>描述</th>
-          <th style="width: 150px">建立時間</th>
+          <th class="d-none d-sm-table-cell">描述</th>
+          <th style="width: 150px" class="d-none d-sm-table-cell">建立時間</th>
           <th style="width: 150px">是否公開</th>
           <th style="width: 150px">編輯</th>
         </tr>
@@ -33,8 +33,8 @@
         <tr v-for="item in articles" :key="item.id">
           <td>{{item.title}}</td>
           <td>{{item.author}}</td>
-          <td>{{item.description}}</td>
-          <td>{{$filters.date(item.create_at)}}</td>
+          <td class="d-none d-sm-table-cell">{{item.description}}</td>
+          <td class="d-none d-sm-table-cell">{{$filters.date(item.create_at)}}</td>
           <td>{{item.isPublic? '已上架': '未上架'}}</td>
           <td>
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
@@ -81,18 +81,26 @@ export default {
       this.currentPage = page;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/articles?page=${this.currentPage}`;
       this.isLoading = true;
-      this.axios.get(api).then((res) => {
-        if (res.data.success) {
-          this.articles = res.data.articles;
-          this.pagination = res.data.pagination;
-        } else {
+      this.axios.get(api)
+        .then((res) => {
+          if (res.data.success) {
+            this.articles = res.data.articles;
+            this.pagination = res.data.pagination;
+          } else {
+            this.Toast.fire({
+              icon: 'error',
+              title: `${res.data.message}`,
+            });
+          }
+          this.isLoading = false;
+        })
+        .catch(() => {
           this.Toast.fire({
             icon: 'error',
-            title: `${res.data.message}`,
+            title: '無法取得文章，請再次確認!',
           });
-        }
-        this.isLoading = false;
-      });
+          this.isLoading = false;
+        });
     },
     getArticle(id) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/article/${id}`;
@@ -107,6 +115,13 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得文章，請再次確認!',
+          });
           this.isLoading = false;
         });
     },
@@ -153,6 +168,13 @@ export default {
             });
           }
           this.isLoading = false;
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法更新文章，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     deleteArticle() {
@@ -172,6 +194,13 @@ export default {
               title: `${res.data.message}`,
             });
           }
+        })
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法刪除文章，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
   },

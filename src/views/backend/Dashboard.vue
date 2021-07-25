@@ -1,7 +1,12 @@
 <template>
 <DashboardMenu></DashboardMenu>
-  <div class="container-fluid px-5">
+  <div class="container-fluid px-4">
+    <div class="row justify-content-center">
+      <main class="col-md-10">
         <router-view v-if="check"></router-view>
+      </main>
+    </div>
+
   </div>
 
 </template>
@@ -32,6 +37,10 @@ export default {
             title: '登入成功',
           });
         } else {
+          this.Toast.fire({
+            icon: 'error',
+            title: '登入失敗',
+          });
           this.$router.push('/login');
         }
       });

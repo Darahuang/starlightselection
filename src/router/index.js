@@ -41,9 +41,19 @@ const routes = [
         component: () => import('../views/frontend/Payment.vue'),
       },
       {
+        path: 'article/:id',
+        name: 'Article',
+        component: () => import('../views/frontend/Article.vue'),
+      },
+      {
         path: 'savedItems',
         name: 'SavedItems',
         component: () => import('../views/frontend/SavedItems.vue'),
+      },
+      {
+        path: 'faq',
+        name: 'FAQ',
+        component: () => import('../views/frontend/FAQ.vue'),
       },
     ],
   },
@@ -51,12 +61,13 @@ const routes = [
     path: '/login',
     component: () => import('../views/frontend/Login.vue'),
   },
+
   {
     path: '/admin',
     component: () => import('../views/backend/Dashboard.vue'),
     children: [
       {
-        path: 'products',
+        path: '',
         component: () => import('../views/backend/DashboardProducts.vue'),
       },
       {
@@ -73,6 +84,8 @@ const routes = [
       },
     ],
   },
+  { path: '/:pathMatch(.*)*', component: () => import('../views/frontend/PathNotFound.vue') },
+
 ];
 
 const router = createRouter({

@@ -5,7 +5,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5 class="modal-title text-white" id="exampleModalLabel">刪除 {{item.title}}</h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel"
+        v-if="item.title">刪除 {{item.title}}</h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel"
+        v-else>刪除訂單編號 {{item.id}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
