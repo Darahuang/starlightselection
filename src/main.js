@@ -8,6 +8,8 @@ import { localize, setLocale } from '@vee-validate/i18n'; // 匯入多國語系�
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'; // 匯入繁體中文語系檔案
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import AOS from 'aos';
+import '../node_modules/aos/dist/aos.css';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -35,7 +37,8 @@ setLocale('zh_TW');
 const app = createApp(App).use(store).use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);
-
+app.use(AOS);
+AOS.init();
 app.config.globalProperties.$filters = {
   date,
   dollarSignThousandth,

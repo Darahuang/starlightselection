@@ -93,7 +93,8 @@
           />
         </div>
         <div class="row" v-if="filterProducts.length !== 0">
-          <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id">
+          <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id"
+          data-aos="fade-up">
             <div class="card h-100 cursor products-card border-0 shadow-sm">
               <div class="overflow-hidden position-relative">
                 <img

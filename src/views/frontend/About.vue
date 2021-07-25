@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-10">
          <div class="row align-items-center">
-           <div class="col-md-6">
+           <div class="col-md-6" data-aos="fade-right">
               <h3 class="fw-bold">成立</h3>
               <p class="lh-base">
                 WorldTrip，成立的初衷是希望以讓大家能透過旅行感受到幸福和滿足感，根據顧客的需求來規劃出
@@ -15,7 +15,7 @@
                 讓顧客們能夠根據自己的興趣來找到喜愛的旅遊方式。
               </p>
            </div>
-           <div class="col-md-6">
+           <div class="col-md-6" data-aos="fade-left">
              <div class="row">
                <div class="col-md-6 col-6">
                     <div

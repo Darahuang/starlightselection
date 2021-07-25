@@ -6,7 +6,7 @@
       >常見問題
     </h2>
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-8" data-aos="zoom-in">
         <ul class="accordion list-unstyled" id="faq-accordion">
            <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">

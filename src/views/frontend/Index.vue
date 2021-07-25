@@ -26,10 +26,10 @@
       </div>
     </div>
   </header>
-  <section class="container mt-6">
+  <section class="container mt-6" data-aos="fade-down">
     <ul class="row list-unstyled">
       <li class="col-md-4">
-        <div class="feature text-center bg-white">
+        <div class="feature text-center bg-white" >
           <div class="feature-icon bg-white">
             <span class="material-icons-outlined">
               public
@@ -90,7 +90,7 @@
   <section class="container mt-6">
     <h2 class="topic">精選商品</h2>
     <ul class="row list-unstyled g-2">
-      <li class="col-md-4" v-if="products[2]">
+      <li class="col-md-4" v-if="products[2]" data-aos="fade-down">
         <div
           class="card selected-card selected-card-single cursor"
           @click="toProduct(products[2].id)"
@@ -106,7 +106,7 @@
           </div>
         </div>
       </li>
-      <li class="col-md-4 h-100" v-if="products[0]">
+      <li class="col-md-4 h-100" v-if="products[0]" data-aos="fade-down">
         <ul class="list-unstyled row flex-column g-2">
           <li class="col">
             <div
@@ -124,7 +124,7 @@
               </div>
             </div>
           </li>
-          <li class="col " v-if="products[1]">
+          <li class="col " v-if="products[1]" data-aos="fade-down">
             <div
               class="card selected-card cursor"
               @click="toProduct(products[1].id)"
@@ -143,7 +143,7 @@
         </ul>
       </li>
 
-      <li class="col-md-4" v-if="products[3]">
+      <li class="col-md-4" v-if="products[3]" data-aos="fade-down">
         <ul class="list-unstyled row flex-column g-2">
           <li class="col" v-if="products[3]">
             <div
@@ -161,7 +161,7 @@
               </div>
             </div>
           </li>
-          <li class="col " v-if="products[4]">
+          <li class="col " v-if="products[4]" data-aos="fade-down">
             <div
               class="card selected-card cursor"
               @click="toProduct(products[4].id)"
@@ -185,7 +185,8 @@
   <section class="container my-6">
     <h2 class="topic">旅遊須知</h2>
     <ul class="row list-unstyled">
-      <li class="col-md-4 mt-3" v-for="article in articles" :key="article.create_at">
+      <li class="col-md-4 mt-3" v-for="article in articles" :key="article.create_at"
+       data-aos="fade-up">
         <div class=" notice-card">
           <div class="overflow-hidden">
             <img
