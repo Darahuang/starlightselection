@@ -65,12 +65,8 @@
             </div>
             <div class="col-sm-8">
               <label for="tag" class="form-label">標籤</label>
-               <div class="row gx-2 mb-3">
-                <div
-                  class="col-md-3 mb-1"
-                  v-for="(label, key) in tempArticle.tag"
-                  :key="key"
-                >
+              <div class="row gx-2 mb-3">
+                <div class="col-md-3 mb-1" v-for="(label, key) in tempArticle.tag" :key="key">
                   <div class="input-group input-group-sm">
                     <input
                       type="text"
@@ -92,12 +88,10 @@
                 </div>
                 <div
                   class="col-md-2 mb-1"
-                  v-if="
-                    tempArticle.tag[tempArticle.tag.length - 1] ||
-                    !tempArticle.tag.length
-                  "
+                  v-if="tempArticle.tag[tempArticle.tag.length - 1] || !tempArticle.tag.length"
                 >
                   <button
+                    type="button"
                     class="btn btn-outline-primary d-block w-100"
                     @click="tempArticle.tag.push('')"
                   >
@@ -107,8 +101,12 @@
               </div>
               <div class="mb-3">
                 <label for="description" class="form-label">文章描述</label>
-                <textarea class="form-control" id="description" rows="3"
-                v-model="tempArticle.description"></textarea>
+                <textarea
+                  class="form-control"
+                  id="description"
+                  rows="3"
+                  v-model="tempArticle.description"
+                ></textarea>
               </div>
               <div class="mb-3">
                 <ckeditor
@@ -119,26 +117,27 @@
               </div>
               <div class="mb-3">
                 <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="isPublic"
-                  checked
-                  v-model="tempArticle.isPublic"
-                />
-                <label class="form-check-label" for="isPublic">
-                  是否公開
-                </label>
-              </div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="isPublic"
+                    checked
+                    v-model="tempArticle.isPublic"
+                  />
+                  <label class="form-check-label" for="isPublic">
+                    是否公開
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"
-          @click="$emit('emit-article', tempArticle)">確認</button>
+          <button type="button" class="btn btn-primary" @click="$emit('emit-article', tempArticle)">
+            確認
+          </button>
         </div>
       </div>
     </div>

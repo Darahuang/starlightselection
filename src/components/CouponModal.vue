@@ -42,12 +42,7 @@
           </div>
           <div class="mb-3">
             <label for="due_date" class="form-label">到期日</label>
-            <input
-              type="date"
-              class="form-control"
-              id="due_date"
-              v-model="due_date"
-            />
+            <input type="date" class="form-control" id="due_date" v-model="due_date" />
           </div>
           <div class="mb-3">
             <label for="percent" class="form-label">折扣百分比</label>
@@ -60,10 +55,14 @@
             />
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox"
-            id="is_enabled" v-model.number="tempCoupon.is_enabled"
-            :true-value="1"
-            :false-value="0"/>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="is_enabled"
+              v-model.number="tempCoupon.is_enabled"
+              :true-value="1"
+              :false-value="0"
+            />
             <label class="form-check-label" for="is_enabled">
               是否啟用
             </label>
@@ -72,7 +71,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" @click="$emit('emit-coupon', tempCoupon)">
-            更新優惠券</button>
+            更新優惠券
+          </button>
         </div>
       </div>
     </div>

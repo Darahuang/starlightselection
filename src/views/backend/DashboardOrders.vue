@@ -1,12 +1,5 @@
 <template>
-  <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
-  <!-- Button trigger modal -->
+  <Loading :isLoading="isLoading"></Loading>
   <div class="table-responsive my-5">
     <table class="table table-hover">
       <thead>
@@ -20,10 +13,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in orders" :key="item.id" :class="{'text-muted':!item.is_paid}">
+        <tr v-for="item in orders" :key="item.id" :class="{ 'text-muted': !item.is_paid }">
           <td class="d-none d-sm-table-cell">{{ $filters.date(item.create_at) }}</td>
           <td class="d-none d-sm-table-cell">{{ item.user.email }}</td>
-          <td >
+          <td>
             <ul class="list-unstyled mb-0">
               <li v-for="product in item.products" :key="product.id" class="mb-1">
                 {{ product.product.title }} 人數: {{ product.qty }} {{ product.product.unit }}
@@ -32,22 +25,35 @@
           </td>
           <td>{{ $filters.dollarSignThousandth(item.total) }}</td>
           <td class="d-none d-sm-table-cell">
-            <div class="form-check form-switch" >
-              <input class="form-check-input" type="checkbox" :id="item.id"
-              v-model="item.is_paid"
-              @change="updateOrder(item)"
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                :id="item.id"
+                v-model="item.is_paid"
+                @change="updateOrder(item)"
               />
-              <label class="form-check-label" :for="item.id"
-                > {{ item.is_paid ? "已付款" : "未付款" }}</label
+              <label class="form-check-label" :for="item.id">
+                {{ item.is_paid ? "已付款" : "未付款" }}</label
               >
             </div>
           </td>
           <td>
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-              <button type="button" class="btn btn-outline-primary"
-              @click="openModal('check',item)">檢視</button>
-              <button type="button" class="btn btn-outline-danger"
-              @click="openModal('delete',item)">刪除</button>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                @click="openModal('check', item)"
+              >
+                檢視
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="openModal('delete', item)"
+              >
+                刪除
+              </button>
             </div>
           </td>
         </tr>
@@ -63,6 +69,7 @@
 import Pagination from '@/components/Pagination.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import DelModal from '@/components/DelModal.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
   data() {
@@ -78,6 +85,7 @@ export default {
     Pagination,
     OrderModal,
     DelModal,
+    Loading,
   },
   inject: ['Toast'],
   methods: {
@@ -113,7 +121,8 @@ export default {
         is_paid: item.is_paid,
       };
       this.isLoading = true;
-      this.axios.put(api, { data: paid })
+      this.axios
+        .put(api, { data: paid })
         .then((res) => {
           if (res.data.success) {
             this.getOrders(this.currentPage);
@@ -150,7 +159,8 @@ export default {
     deleteOrder() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/order/${this.tempOrder.id}`;
       this.isLoading = true;
-      this.axios.delete(api)
+      this.axios
+        .delete(api)
         .then((res) => {
           if (res.data.success) {
             this.getOrders(this.currentPage);

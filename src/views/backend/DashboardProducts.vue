@@ -1,16 +1,7 @@
 <template>
-  <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
+  <Loading :isLoading="isLoading"></Loading>
   <div class="text-end mt-5">
-    <button
-      type="button" class="btn btn-primary"
-      @click="openModal('new')"> 建立新的產品
-    </button>
+    <button type="button" class="btn btn-primary" @click="openModal('new')">建立新的產品</button>
   </div>
   <div class="table-responsive mt-3">
     <table class="table table-hover">
@@ -18,9 +9,9 @@
         <tr>
           <th style="width: 120px">分類</th>
           <th style="width: 400px">產品名稱</th>
-          <th  class="d-none d-sm-table-cell" style="width: 150px">原價</th>
+          <th style="width: 150px" class="d-none d-sm-table-cell">原價</th>
           <th style="width: 150px">售價</th>
-          <th  class="d-none d-sm-table-cell" style="width: 150px">是否啟用</th>
+          <th style="width: 150px" class="d-none d-sm-table-cell">是否啟用</th>
           <th style="width: 150px">編輯</th>
         </tr>
       </thead>
@@ -29,28 +20,42 @@
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
           <td class="d-none d-sm-table-cell">
-            {{ $filters.dollarSignThousandth(item.origin_price) }}</td>
+            {{ $filters.dollarSignThousandth(item.origin_price) }}
+          </td>
           <td>{{ $filters.dollarSignThousandth(item.price) }}</td>
           <td class="d-none d-sm-table-cell">
             <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
             <span v-else>未啟用</span>
           </td>
           <td>
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary btn-sm"
-              @click="openModal('edit', item)">編輯</button>
-              <button type="button" class="btn btn-outline-danger btn-sm"
-              @click="openModal('delete', item)">刪除</button>
-              </div>
-
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                @click="openModal('edit', item)"
+              >
+                編輯
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                @click="openModal('delete', item)"
+              >
+                刪除
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
-      <Pagination :pages="pagination" @emit-page="getProducts"></Pagination>
-      <ProductModal ref="productModal" :product="tempProduct" :isNew="isNew"
-       @emit-product="updateProduct"></ProductModal>
-      <DelModal ref="delModal" :item="tempProduct" @emit-delete="deleteProduct"></DelModal>
+    <Pagination :pages="pagination" @emit-page="getProducts"></Pagination>
+    <ProductModal
+      ref="productModal"
+      :product="tempProduct"
+      :isNew="isNew"
+      @emit-product="updateProduct"
+    ></ProductModal>
+    <DelModal ref="delModal" :item="tempProduct" @emit-delete="deleteProduct"></DelModal>
   </div>
 </template>
 
@@ -58,6 +63,7 @@
 import Pagination from '@/components/Pagination.vue';
 import ProductModal from '@/components/ProductModal.vue';
 import DelModal from '@/components/DelModal.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
   data() {
@@ -74,6 +80,7 @@ export default {
     Pagination,
     ProductModal,
     DelModal,
+    Loading,
   },
   inject: ['Toast'],
   methods: {
@@ -154,7 +161,8 @@ export default {
     deleteProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/product/${this.tempProduct.id}`;
       this.isLoading = true;
-      this.axios.delete(api)
+      this.axios
+        .delete(api)
         .then((res) => {
           if (res.data.success) {
             this.getProducts(this.currentPage);

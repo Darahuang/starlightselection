@@ -1,0 +1,24 @@
+.overlay {
+  @include overlay;
+}
+.customer-bg {
+  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1628329045905.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=exaclewMMVDwME1rao2Sc5ZvMI9yaxRqLCioI29zjYcy6x%2Bi5ed0g9jZRJcswji7NpAdV7bOZnccRGQ2juvVBDuw7QoDiqYRDQuGpCSmpOz%2Bzt7AWTRPuQEgmVn65shMqT5qthDwxdRifgGAiwhjFTbc014wvGml6FT4aaB6to3PJ1qMsTb1lCS12dPjRr6LMyNWT5PphMaMOxQS1V%2FVTx%2FxcU0dUtofOIex75Eoi8DmEeZVUe028zMLYAlgsND%2Bf8Tf8B2Jid6A6o5YBvcycNCOG665qTojgXGsPv5qrCtqQjIgN%2BTDKWQtlgR4yuS5eknHZwEEPyTIOt8f9N5W4Q%3D%3D);
+  height: 300px;
+}
+
+.customer-icon {
+  height: 35px;
+  width: 35px;
+  line-height: 35px;
+  border-radius: 50%;
+  position: absolute;
+  left: 75px;
+  top: 70px;
+  z-index: 5;
+}
+
+.customer-img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}

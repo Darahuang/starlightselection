@@ -1,65 +1,49 @@
 <template>
-  <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
+  <Loading :isLoading="isLoading"></Loading>
   <div class="container-fluid products-banner-bg bg-cover"></div>
-  <section class="container py-5">
+  <section class="container my-5">
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <ul
           class="d-flex list-unstyled justify-content-md-between
-            justify-content-center products-border
-             flex-wrap"
+            justify-content-center category-border flex-wrap"
         >
-          <li
-            class="products-list text-center"
-          >
+          <li class="category-list text-center">
             <a
               href="#"
-              class="text-decoration-none link-primary-hover link-dark
-                h3 d-block mb-0 py-2"
+              class="text-decoration-none category-list-border link-dark
+                    h3 d-block mb-0 py-2"
               @click.prevent="(category = ''), (searchInput = '')"
             >
-              <span class="material-icons-outlined categoryIcon-hover ">travel_explore</span>
+              <span class="material-icons-outlined categoryIcon-hover">travel_explore</span>
               全部
             </a>
           </li>
-          <li
-            class="products-list text-center"
-          >
+          <li class="category-list text-center">
             <a
               href="#"
-              class="text-decoration-none link-dark link-primary-hover
-                h3  d-block mb-0 py-2"
+              class="text-decoration-none link-dark category-list-border h3 d-block mb-0 py-2"
               @click.prevent="(category = '亞洲'), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover"> festival </span>
               亞洲</a
             >
           </li>
-          <li
-            class="products-list text-center"
-          >
+          <li class="category-list text-center">
             <a
               href="#"
-              class="text-decoration-none link-dark link-primary-hover
+              class="text-decoration-none link-dark category-list-border
                 h3 mb-0 py-2 d-block "
               @click.prevent="(category = '歐洲'), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover"> gite </span> 歐洲
             </a>
           </li>
-          <li
-            class="products-list text-center"
-          >
+          <li class="category-list text-center">
             <a
               href="#"
-              class="text-decoration-none link-dark link-primary-hover
-                h3 mb-0 py-2 d-block"
+              class="text-decoration-none link-dark category-list-border
+                    h3 mb-0 py-2 d-block"
               @click.prevent="(category = '美洲'), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover">
@@ -68,17 +52,15 @@
               美洲</a
             >
           </li>
-          <li
-            class="products-list text-center"
-          >
+          <li class="category-list text-center">
             <a
               href="#"
-              class="text-decoration-none link-dark link-primary-hover
-                h3 mb-0 py-2 d-block"
+              class="text-decoration-none link-dark category-list-border
+                     h3 mb-0 py-2 d-block"
               @click.prevent="(category = '大洋洲'), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover"> sailing </span>
-                大洋洲
+              大洋洲
             </a>
           </li>
         </ul>
@@ -93,52 +75,54 @@
           />
         </div>
         <div class="row" v-if="filterProducts.length !== 0">
-          <div class="col-lg-4 col-md-6 mt-5" v-for="item in filterProducts" :key="item.id"
-          data-aos="fade-up">
+          <div
+            class="col-lg-4 col-md-6 mt-5"
+            v-for="item in filterProducts"
+            :key="item.id"
+            data-aos="fade-up"
+          >
             <div class="card h-100 cursor products-card border-0 shadow-sm">
               <div class="overflow-hidden position-relative">
                 <img
                   :src="item.imageUrl"
                   class="products-card-img"
-                  alt="..."
+                  alt="產品圖片"
                   @click="toProduct(item.id)"
                 />
                 <!-- 手機以上的hover效果 -->
                 <ul
                   class="social-icon justify-content-center text-center list-unstyled
-                d-none d-sm-flex"
+                        d-none d-sm-flex"
                 >
-                  <li >
-                    <a href="#" class="link-dark"
-                    @click.prevent="addToFavorite(item)">
+                  <li>
+                    <a href="#" class="link-dark" @click.prevent="addToFavorite(item)">
                       <span
-                      class="material-icons-outlined text-danger icon fs-3"
-                      v-if="myFavorite.find(el => el.title === item.title)"
-                    >
-                      favorite
-                    </span>
-                    <span class="material-icons-outlined icon fs-3" v-else>
-                      favorite_border
-                    </span>
+                        class="material-icons-outlined text-danger icon fs-3"
+                        v-if="myFavorite.find(el => el.title === item.title)"
+                      >
+                        favorite
+                      </span>
+                      <span class="material-icons-outlined icon fs-3" v-else>
+                        favorite_border
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#" class="link-dark" @click.prevent="addToCart(item.id)">
-                    <span class="material-icons-outlined icon fs-3">
-                      shopping_cart
-                    </span>
-                  </a>
+                      <span class="material-icons-outlined icon fs-3">
+                        shopping_cart
+                      </span>
+                    </a>
                   </li>
                   <li>
                     <a href="#" class="link-dark" @click.prevent="toProduct(item.id)">
-                    <span class="material-icons-outlined icon fs-3">
-                      zoom_in
-                    </span>
-                  </a>
+                      <span class="material-icons-outlined icon fs-3">
+                        zoom_in
+                      </span>
+                    </a>
                   </li>
                 </ul>
-
-                 <!-- 手機以下我的最愛樣式 -->
+                <!-- 手機以下我的最愛樣式 -->
                 <div
                   class="favoriteIcon-position favoriteIcon-bg p-2 d-block d-sm-none"
                   @click="addToFavorite(item)"
@@ -154,7 +138,6 @@
                   </span>
                 </div>
               </div>
-
               <span class="badge bg-secondary badge-position px-3 py-2 z-index">
                 {{ item.category }}</span
               >
@@ -163,10 +146,10 @@
                 <p class="card-text">{{ item.description }}</p>
                 <p class="h5 text-danger">{{ $filters.dollarSignThousandth(item.price) }}</p>
               </div>
-
               <!-- 手機以下加入購物車樣式 -->
               <div class="mt-2 text-center d-block d-sm-none">
                 <button
+                  type="button"
                   class="btn btn-slide-right col-6 p-2 border-0"
                   @click="addToCart(item.id)"
                   :disabled="loadingStatus.loadingItem === item.id"
@@ -184,9 +167,8 @@
             </div>
           </div>
         </div>
-
         <div v-else class="d-flex justify-content-center align-items-center">
-          <div class="search-img"></div>
+          <div class="search-bg bg-contain bg-no-repeat"></div>
           <p class="fw-bold">查無資料,請再次確認!</p>
         </div>
       </div>
@@ -196,16 +178,9 @@
 
 <script>
 import emitter from '@/methods/emitter';
+import localStorageMethods from '@/methods/localStorageMethods';
+import Loading from '@/components/Loading.vue';
 
-const localStorageMethods = {
-  save(item) {
-    const itemString = JSON.stringify(item);
-    localStorage.setItem('favorite', itemString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('favorite'));
-  },
-};
 export default {
   data() {
     return {
@@ -215,10 +190,12 @@ export default {
         loadingItem: '',
       },
       myFavorite: localStorageMethods.get() || [],
-      // carts: [],
       category: '',
       searchInput: '',
     };
+  },
+  components: {
+    Loading,
   },
   inject: ['Toast'],
   methods: {
@@ -236,6 +213,7 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.goTop();
           this.isLoading = false;
         })
         .catch((err) => {
@@ -281,14 +259,12 @@ export default {
       const favIndex = this.myFavorite.findIndex((item) => item.id === favoriteItem.id);
       if (favIndex === -1) {
         this.myFavorite.push(favoriteItem);
-
         this.Toast.fire({
           icon: 'success',
           title: `${favoriteItem.title}加入我的最愛`,
         });
       } else {
         this.myFavorite.splice(favIndex, 1);
-
         this.Toast.fire({
           icon: 'warning',
           title: `${favoriteItem.title}從我的最愛移出`,
@@ -297,6 +273,14 @@ export default {
     },
     toProduct(id) {
       this.$router.push(`/product/${id}`);
+    },
+    goTop() {
+      if (window.pageYOffset > 100) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
     },
   },
   computed: {

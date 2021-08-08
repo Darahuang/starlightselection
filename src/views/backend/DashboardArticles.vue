@@ -1,11 +1,5 @@
 <template>
-  <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
+  <Loading :isLoading="isLoading"></Loading>
   <div class="text-end mt-5">
     <button
       type="button"
@@ -31,25 +25,35 @@
       </thead>
       <tbody>
         <tr v-for="item in articles" :key="item.id">
-          <td>{{item.title}}</td>
-          <td>{{item.author}}</td>
-          <td class="d-none d-sm-table-cell">{{item.description}}</td>
-          <td class="d-none d-sm-table-cell">{{$filters.date(item.create_at)}}</td>
-          <td>{{item.isPublic? '已上架': '未上架'}}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.author }}</td>
+          <td class="d-none d-sm-table-cell">{{ item.description }}</td>
+          <td class="d-none d-sm-table-cell">{{ $filters.date(item.create_at) }}</td>
+          <td>{{ item.isPublic ? "已上架" : "未上架" }}</td>
           <td>
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-              <button type="button" class="btn btn-outline-primary"
-              @click="getArticle(item.id)">編輯</button>
-              <button type="button" class="btn btn-outline-danger"
-              @click="openModal('delete', item)">刪除</button>
+              <button type="button" class="btn btn-outline-primary" @click="getArticle(item.id)">
+                編輯
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="openModal('delete', item)"
+              >
+                刪除
+              </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <ArticleModal ref="articleModal" :article="tempArticles" :isNew="isNew"
-  @emit-article="updateArticle"></ArticleModal>
+  <ArticleModal
+    ref="articleModal"
+    :article="tempArticles"
+    :isNew="isNew"
+    @emit-article="updateArticle"
+  ></ArticleModal>
   <DelModal ref="delModal" :item="tempArticles" @emit-delete="deleteArticle"></DelModal>
   <Pagination :pages="pagination" @emit-page="getArticles"></Pagination>
 </template>
@@ -58,6 +62,7 @@
 import ArticleModal from '@/components/ArticleModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import DelModal from '@/components/DelModal.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
   data() {
@@ -75,13 +80,15 @@ export default {
     ArticleModal,
     Pagination,
     DelModal,
+    Loading,
   },
   methods: {
     getArticles(page = 1) {
       this.currentPage = page;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/articles?page=${this.currentPage}`;
       this.isLoading = true;
-      this.axios.get(api)
+      this.axios
+        .get(api)
         .then((res) => {
           if (res.data.success) {
             this.articles = res.data.articles;
@@ -105,7 +112,8 @@ export default {
     getArticle(id) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/article/${id}`;
       this.isLoading = true;
-      this.axios.get(api)
+      this.axios
+        .get(api)
         .then((res) => {
           if (res.data.success) {
             this.openModal('edit', res.data.article);
@@ -179,7 +187,8 @@ export default {
     },
     deleteArticle() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/article/${this.tempArticles.id}`;
-      this.axios.delete(api)
+      this.axios
+        .delete(api)
         .then((res) => {
           if (res.data.success) {
             this.getArticles(this.currentPage);

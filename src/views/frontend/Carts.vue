@@ -1,21 +1,9 @@
 <template>
-  <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
-  <section class="container my-5 py-5" v-if="carts.total !== 0">
-    <h2 class="text-center h1 mb-4">
-        <span class="material-icons-outlined h1 align-middle text-primary">
-          shopping_cart
-        </span>
-        購物清單
-      </h2>
-
+  <Loading :isLoading="isLoading"></Loading>
+  <section class="container my-5" v-if="carts.total !== 0">
     <div class="row justify-content-center">
       <div class="col-lg-10">
+        <CartStep :done="done"></CartStep>
         <div class="row">
           <div class="col-lg-8 mb-3 mb-lg-0">
             <a
@@ -26,32 +14,27 @@
               >清空購物清單</a
             >
             <template v-if="carts.carts">
-              <div
-                class="d-flex border p-3"
-                v-for="item in carts.carts"
-                :key="item.id"
-              >
+              <div class="d-flex border p-3" v-for="item in carts.carts" :key="item.id">
                 <img
                   :src="item.product.imageUrl"
-                  alt=""
+                  alt="產品圖片"
                   srcset=""
                   style="width: 120px; height: 120px"
                   class="d-none d-sm-block"
                 />
-                <div class="flex-grow-1 ms-3 d-flex justify-content-between ">
+                <div class="flex-grow-1 ms-3 d-flex justify-content-between">
                   <div class="">
                     <h3 class="h5 ">{{ item.product.title }}</h3>
-                    <small class="">{{ $filters.dollarSignThousandth(item.product.price) }}</small>
+                    <small>{{ $filters.dollarSignThousandth(item.product.price) }}</small>
                     <small> * {{ item.qty }}{{ item.product.unit }}</small>
                     <div class="input-group input-group-sm my-3">
                       <button
-                        class="btn btn-outline-secondary"
                         type="button"
-                        id="button-addon1"
+                        class="btn btn-outline-secondary"
                         @click="updateCart(item.id, item.qty - 1)"
                       >
                         <span class="material-icons-outlined align-middle">
-                            remove
+                          remove
                         </span>
                       </button>
                       <input
@@ -64,13 +47,13 @@
                         @change="updateCart(item.id, item.qty)"
                       />
                       <button
-                        class="btn btn-outline-secondary"
                         type="button"
+                        class="btn btn-outline-secondary"
                         id="button-addon1"
                         @click="updateCart(item.id, item.qty + 1)"
                       >
                         <span class="material-icons-outlined align-middle">
-                            add
+                          add
                         </span>
                       </button>
                     </div>
@@ -85,7 +68,7 @@
               </div>
             </template>
           </div>
-          <div class="col-lg-4 ">
+          <div class="col-lg-4">
             <div class="card rounded-0">
               <div class="card-header">訂單資訊</div>
               <div class="card-body">
@@ -102,12 +85,7 @@
                     aria-describedby="button-addon1"
                     v-model="coupon"
                   />
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    id="button-addon1"
-                    @click="addCouponCode"
-                  >
+                  <button type="button" class="btn btn-outline-secondary" @click="addCouponCode">
                     套用優惠碼
                   </button>
                 </div>
@@ -115,13 +93,13 @@
                   <span class="material-icons-outlined align-text-bottom">
                     star
                   </span>
-                  <span v-if="carts.total!==carts.final_total">已套用優惠券</span>
+                  <span v-if="carts.total !== carts.final_total">已套用優惠券</span>
                   <span v-else>輸入<span class="text-danger">anniversary</span>可享95折優惠</span>
                 </div>
                 <div class="d-flex justify-content-between border-bottom">
                   <p>折扣金額:</p>
                   <p v-if="carts.final_total">
-                    {{ $filters.dollarSignThousandth(carts.total-carts.final_total) }}
+                    {{ $filters.dollarSignThousandth(carts.total - carts.final_total) }}
                   </p>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
@@ -132,8 +110,13 @@
                 </div>
               </div>
               <div class="text-muted d-grid gap-2">
-                <router-link to="/checkout" class="btn btn-slide-right
-                 border-0 rounded-0">前往結帳</router-link>
+                <router-link
+                  to="/checkout"
+                  class="btn btn-slide-right
+                 border-0 rounded-0"
+                >
+                  前往結帳
+                </router-link>
               </div>
             </div>
           </div>
@@ -141,20 +124,24 @@
       </div>
     </div>
   </section>
-  <section v-else class="container" >
-     <div  class="d-flex flex-column justify-content-center
-     align-items-center " style="height:100vh">
-             <div class="cart-img"></div>
-              <p class="fw-bold h4 text-center mb-4">購物車目前沒有商品，<br>
-               立刻挑選喜愛的行程吧！</p>
-          <router-link to="/products" class="btn btn-slide-right border-0 px-5 py-2 ">
-          挑選行程</router-link>
-        </div>
+  <section v-else class="container">
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height:100vh">
+      <div class="cart-bg bg-contain bg-no-repeat"></div>
+      <p class="fw-bold h4 text-center mb-4">
+        購物車目前沒有商品，<br />
+        立刻挑選喜愛的行程吧！
+      </p>
+      <router-link to="/products" class="btn btn-slide-right border-0 px-5 py-2">
+        挑選行程
+      </router-link>
+    </div>
   </section>
 </template>
 
 <script>
 import emitter from '@/methods/emitter';
+import Loading from '@/components/Loading.vue';
+import CartStep from '@/components/CartStep.vue';
 
 export default {
   data() {
@@ -162,19 +149,26 @@ export default {
       isLoading: false,
       carts: {},
       coupon: '',
+      done: this.$route.name,
     };
+  },
+  components: {
+    Loading,
+    CartStep,
   },
   inject: ['Toast'],
   methods: {
     getCarts() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/cart`;
       this.isLoading = true;
-      this.axios.get(api)
+      this.axios
+        .get(api)
         .then((res) => {
           if (res.data.success) {
             this.carts = res.data.data;
             console.log(this.carts.carts);
           }
+          this.goTop();
           this.isLoading = false;
         })
         .catch(() => {
@@ -286,7 +280,8 @@ export default {
       const coupon = {
         code: this.coupon,
       };
-      this.axios.post(api, { data: coupon })
+      this.axios
+        .post(api, { data: coupon })
         .then((res) => {
           if (res.data.success) {
             this.getCarts();
@@ -309,6 +304,14 @@ export default {
           });
           this.isLoading = false;
         });
+    },
+    goTop() {
+      if (window.pageYOffset > 100) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
     },
   },
   created() {

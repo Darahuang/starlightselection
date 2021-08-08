@@ -1,29 +1,43 @@
 <template>
-  <section class="bg p-5 mt-6 bg-primary-light">
-    <div class="container  ">
-    <h2 class="topic">客戶好評</h2>
-    <swiper :slidesPerView="1" :spaceBetween="10"
-    :autoplay='{
-    "delay": 2500,
-    "stopOnLastSlide": false,
-    "disableOnInteraction": false,
-    "pauseOnMouseEnter": true,
-     }'
-     :breakpoints='{
-  "768": {
-    "slidesPerView": 2,
-    "spaceBetween": 20
-  }}'
-     :loop="true" :loopFillGroupWithBlank="true"   class="mySwiper">
-  <swiper-slide v-for="(item, index) in users" :key="index" style="height:250px"
-   >
-   <div class=" bg-white p-3 " >
-     <div class="text-center">
-       <img :src="item.imageUrl" class="rounded-pill" alt="" srcset="" style="height:100px">
-     </div>
-
-     <p class="text-start ">{{item.comment}}</p>
-     <div class="d-flex justify-content-end">
+  <div class="container mt-6">
+    <h2 class="topic mb-3">客戶好評</h2>
+  </div>
+  <section
+    class="p-5 bg-cover position-relative customer-bg"
+    style="background-image:url(https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80)"
+  >
+    <div class="overlay"></div>
+    <div class="container">
+      <swiper
+        :slidesPerView="1"
+        :spaceBetween="10"
+        :autoplay="{
+          delay: 2500,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }"
+        :breakpoints="{
+          '768': {
+            slidesPerView: 1,
+            spaceBetween: 20
+          }
+        }"
+        :loop="true"
+        :loopFillGroupWithBlank="true"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(item, index) in users" :key="index">
+          <div class="position-relative customer-img">
+            <img :src="item.imageUrl" class="rounded-pill img-fluid" alt="客戶圖片" srcset="" />
+            <div class="bg-white customer-icon text-center">
+              <span class="material-icons-outlined align-middle">
+                format_quote
+              </span>
+            </div>
+          </div>
+          <p class="text-center text-white mt-3">{{ item.comment }}</p>
+          <div class="d-flex justify-content-center">
             <div class="me-0 me-sm-3 text-secondary">
               <span class="material-icons-outlined">
                 star
@@ -41,27 +55,20 @@
                 star
               </span>
             </div>
-            <p class="me-0 me-sm-3">{{item.name}}</p>
+            <p class=" text-white">{{ item.name }}</p>
           </div>
-   </div>
-
-  </swiper-slide>
-  </swiper>
-  </div>
+        </swiper-slide>
+      </swiper>
+    </div>
   </section>
-
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper.scss';
-
 import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-
-import SwiperCore, {
-  Autoplay,
-} from 'swiper/core';
+import SwiperCore, { Autoplay } from 'swiper/core';
 
 SwiperCore.use([Autoplay]);
 
@@ -98,6 +105,5 @@ export default {
     Swiper,
     SwiperSlide,
   },
-
 };
 </script>

@@ -6,7 +6,6 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
     ref="modal"
-
   >
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -50,7 +49,7 @@
                   ref="files"
                 />
               </div>
-              <img :src="tempProduct.imageUrl" class="img-fluid" alt="" />
+              <img :src="tempProduct.imageUrl" class="img-fluid" alt="產品圖片" />
               <div class="mt-5" v-if="tempProduct.imagesUrl">
                 <div class="mb-3" v-for="(image, key) in tempProduct.imagesUrl" :key="key">
                   <input
@@ -59,7 +58,7 @@
                     placeholder="請輸入圖片連結"
                     v-model="tempProduct.imagesUrl[key]"
                   />
-                  <img :src="image" class="img-fluid" alt="" srcset="" />
+                  <img :src="image" class="img-fluid" alt="產品圖片" v-if="image" />
                   <button
                     type="button"
                     class="btn btn-outline-danger mt-3"
@@ -71,10 +70,11 @@
                 <div
                   v-if="
                     tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1] ||
-                    !tempProduct.imagesUrl.length
+                      !tempProduct.imagesUrl.length
                   "
                 >
                   <button
+                    type="button"
                     class="btn btn-outline-primary col-12 mt-3"
                     @click="tempProduct.imagesUrl.push('')"
                   >
@@ -154,7 +154,7 @@
                   id="itinerary "
                   rows="7"
                   placeholder="請輸入景點行程"
-                  v-model="tempProduct.content "
+                  v-model="tempProduct.content"
                 ></textarea>
               </div>
               <div class="mb-3">

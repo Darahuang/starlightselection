@@ -1,12 +1,5 @@
 <template>
-  <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
-  <!-- Button trigger modal -->
+  <Loading :isLoading="isLoading"></Loading>
   <div class="text-end mt-5">
     <button
       type="button"
@@ -39,19 +32,29 @@
           <td>{{ item.is_enabled === 1 ? "啟用" : "未啟用" }}</td>
           <td>
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-              <button type="button" class="btn btn-outline-primary"
-              @click="openModal('edit',item)">編輯</button>
-              <button type="button" class="btn btn-outline-danger"
-               @click="openModal('delete', item)">刪除</button>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                @click="openModal('edit', item)"
+              >
+                編輯
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="openModal('delete', item)"
+              >
+                刪除
+              </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-      <Pagination :pages="pagination" @emit-page="getCoupons"></Pagination>
-   <CouponModal ref="couponModal" :coupon="tempCoupon" :isNew="isNew" @emit-coupon="updateCoupon">
-   </CouponModal>
-   <DelModal ref="delModal" :item="tempCoupon" @emit-delete="deleteCoupon"></DelModal>
+    <Pagination :pages="pagination" @emit-page="getCoupons"></Pagination>
+    <CouponModal ref="couponModal" :coupon="tempCoupon" :isNew="isNew" @emit-coupon="updateCoupon">
+    </CouponModal>
+    <DelModal ref="delModal" :item="tempCoupon" @emit-delete="deleteCoupon"></DelModal>
   </div>
 </template>
 
@@ -59,6 +62,7 @@
 import Pagination from '@/components/Pagination.vue';
 import CouponModal from '@/components/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
   data() {
@@ -75,6 +79,7 @@ export default {
     Pagination,
     CouponModal,
     DelModal,
+    Loading,
   },
   inject: ['Toast'],
   methods: {
@@ -157,7 +162,8 @@ export default {
     deleteCoupon() {
       this.isLoading = true;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_APIPATH}/admin/coupon/${this.tempCoupon.id}`;
-      this.axios.delete(api)
+      this.axios
+        .delete(api)
         .then((res) => {
           if (res.data.success) {
             this.getCoupons(this.currentPage);

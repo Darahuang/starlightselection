@@ -78,26 +78,34 @@
                   <tr v-for="product in tempOrder.products" :key="product.id">
                     <th>{{ product.product.title }}</th>
                     <td>{{ product.qty }}/{{ product.product.unit }}</td>
-                    <td class="text-end">{{ $filters.dollarSignThousandth(product.final_total) }}
+                    <td class="text-end">
+                      {{ $filters.dollarSignThousandth(product.final_total) }}
                     </td>
                   </tr>
                 </tbody>
               </table>
               <div class="form-check float-end">
-                <input class="form-check-input" type="checkbox" value=""
-                id="payment" v-model="tempOrder.is_paid"/>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="payment"
+                  v-model="tempOrder.is_paid"
+                />
                 <label class="form-check-label" for="payment">
-                  {{tempOrder.is_paid? '已付款' :'未付款'}}
+                  {{ tempOrder.is_paid ? "已付款" : "未付款" }}
                 </label>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary"
-          data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            取消
+          </button>
           <button type="button" class="btn btn-primary" @click="$emit('emit-change', tempOrder)">
-            修改付款狀態</button>
+            修改付款狀態
+          </button>
         </div>
       </div>
     </div>

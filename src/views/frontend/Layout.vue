@@ -1,15 +1,10 @@
 <template>
-
-      <Menu></Menu>
-      <div class="wrapper">
-         <router-view   ></router-view>
-         <!-- <div is="vue:GoTop"></div> -->
-
-      </div>
-
-       <Footer></Footer>
-       <GoTop></GoTop>
-
+  <Menu />
+  <div class="wrapper">
+    <router-view></router-view>
+  </div>
+  <Footer />
+  <GoTop />
 </template>
 
 <script>

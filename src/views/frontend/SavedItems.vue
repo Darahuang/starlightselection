@@ -1,103 +1,84 @@
 <template>
-<loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
-   <section class="container my-5 py-5" v-if="myFavorite.length!== 0 ">
-     <h2 class="text-center text-primary fw-bold h1 mb-4">
-        <span class="material-icons-outlined h1  align-middle text-secondary">
-          favorite
-        </span>
-        收藏清單
-      </h2>
-     <div class="row justify-content-center">
-       <div class="col-md-10">
-         <div class="row ">
-           <div class="col-md-4" v-for="item in myFavorite" :key="item.id">
-          <div class="card h-100 cursor products-card border-0">
-               <div class="overflow-hidden">
-                  <img
+  <Loading :isLoading="isLoading"></Loading>
+  <section class="container my-5" v-if="myFavorite.length !== 0">
+    <h2 class="text-center text-primary fw-bold h1 mb-4">
+      <span class="material-icons-outlined h1 align-middle text-secondary">
+        favorite
+      </span>
+      收藏清單
+    </h2>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-4" v-for="item in myFavorite" :key="item.id">
+            <div class="card h-100 cursor products-card border-0">
+              <div class="overflow-hidden">
+                <img
                   :src="item.imageUrl"
                   class="products-card-img position-relative"
-                  alt="..."
+                  alt="產品圖片"
                   @click="toProduct(item.id)"
                 />
-               </div>
-
-                <div class="favoriteIcon-position p-2" @click="removeFavorite(item)">
-                  <span
-                    class="material-icons-outlined text-danger"
-                    v-if="myFavorite.find((el)=> el.title ===item.title)">
-                    favorite
-                  </span>
-                  <span
-                    class="material-icons-outlined text-danger"
-                    v-else>
-                    favorite_border
-                  </span>
-                </div>
-
-                <span class="badge bg-secondary badge-position p-2">{{ item.category }}</span>
-                <div class="card-body text-center" @click="toProduct(item.id)">
-                  <h2 class="card-title h4">{{ item.title }}</h2>
-
-                  <p class="card-text">{{ item.description }}</p>
-                  <p class="h5 text-danger">{{ $filters.dollarSignThousandth(item.price) }}</p>
-
-                </div>
-                <div class="mt-2 text-center">
-                  <button
-                    class="btn btn-slide-right btn-rounded col-6 p-2 border-0"
-                    @click="addToCart(item.id)"
-                    :disabled="loadingStatus.loadingItem === item.id"
-                  >
-                    <div
-                      class="spinner-border text-white spinner-border-sm"
-                      v-if="loadingStatus.loadingItem === item.id"
-                      role="status"
-                    >
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                    加入購物車
-                  </button>
-                </div>
-
               </div>
-       </div>
-         </div>
-       </div>
-
-     </div>
-   </section>
-   <section v-else class="container ">
-     <div  class="d-flex flex-column justify-content-center
-     align-items-center " style="height:100vh">
-             <div class="favorite-img "></div>
-
-              <p class="fw-bold h4 text-center mb-4">收藏清單目前沒有商品，<br>
-立刻挑選喜愛的行程吧！</p>
-          <router-link to="/products" class="btn btn-slide-right border-0 px-5 py-2 btn-rounded">
-          挑選行程</router-link>
-
+              <div class="favoriteIcon-position p-2" @click="removeFavorite(item)">
+                <span
+                  class="material-icons-outlined text-danger"
+                  v-if="myFavorite.find(el => el.title === item.title)"
+                >
+                  favorite
+                </span>
+                <span class="material-icons-outlined text-danger" v-else>
+                  favorite_border
+                </span>
+              </div>
+              <span class="badge bg-secondary badge-position p-2">{{ item.category }}</span>
+              <div class="card-body text-center" @click="toProduct(item.id)">
+                <h2 class="card-title h4">{{ item.title }}</h2>
+                <p class="card-text">{{ item.description }}</p>
+                <p class="h5 text-danger">{{ $filters.dollarSignThousandth(item.price) }}</p>
+              </div>
+              <div class="mt-2 text-center">
+                <button
+                  type="button"
+                  class="btn btn-slide-right btn-rounded col-6 p-2 border-0"
+                  @click="addToCart(item.id)"
+                  :disabled="loadingStatus.loadingItem === item.id"
+                >
+                  <div
+                    class="spinner-border text-white spinner-border-sm"
+                    v-if="loadingStatus.loadingItem === item.id"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  加入購物車
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-   </section>
+      </div>
+    </div>
+  </section>
+  <section v-else class="container">
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height:100vh">
+      <div class="favorite-img bg-contain bg-no-repeat"></div>
+      <p class="fw-bold h4 text-center mb-4">
+        收藏清單目前沒有商品，<br />
+        立刻挑選喜愛的行程吧！
+      </p>
+      <router-link to="/products" class="btn btn-slide-right border-0 px-5 py-2 btn-rounded">
+        挑選行程
+      </router-link>
+    </div>
+  </section>
 </template>
 
 <script>
 import emitter from '@/methods/emitter';
+import localStorageMethods from '@/methods/localStorageMethods';
+import Loading from '@/components/Loading.vue';
 
-const localStorageMethods = {
-  save(item) {
-    const itemString = JSON.stringify(item);
-    localStorage.setItem('favorite', itemString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('favorite'));
-  },
-};
 export default {
   data() {
     return {
@@ -107,6 +88,9 @@ export default {
       },
       isLoading: false,
     };
+  },
+  components: {
+    Loading,
   },
   inject: ['Toast'],
   methods: {
@@ -151,6 +135,14 @@ export default {
     toProduct(id) {
       this.$router.push(`/product/${id}`);
     },
+    goTop() {
+      if (window.pageYOffset > 100) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+    },
   },
   watch: {
     myFavorite: {
@@ -159,6 +151,9 @@ export default {
       },
       deep: true,
     },
+  },
+  created() {
+    this.goTop();
   },
 };
 </script>

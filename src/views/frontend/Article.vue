@@ -1,20 +1,16 @@
 <template>
-   <loading :active="isLoading">
-    <div class="bubblingG">
-      <span id="bubblingG_1"> </span>
-      <span id="bubblingG_2"> </span>
-      <span id="bubblingG_3"> </span>
-    </div>
-  </loading>
+<Loading :isLoading="isLoading"></Loading>
   <section class="container-fluid article-banner bg-cover"
   :style="{backgroundImage:`url(${article.image})`}"></section>
   <section class="container">
-     <h2 class="fw-bold my-4">{{article.title}}</h2>
+     <h2 class="fw-bold my-4">{{ article.title }}</h2>
      <div v-html="article.content"></div>
   </section>
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue';
+
 export default {
   data() {
     return {
@@ -22,6 +18,9 @@ export default {
       article: {},
       isLoading: false,
     };
+  },
+  components: {
+    Loading,
   },
   inject: ['Toast'],
   methods: {
@@ -39,8 +38,17 @@ export default {
               title: `${res.data.message}`,
             });
           }
+          this.goTop();
           this.isLoading = false;
         });
+    },
+    goTop() {
+      if (window.pageYOffset > 100) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
     },
   },
   created() {

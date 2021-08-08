@@ -1,23 +1,23 @@
 .products-banner-bg {
-    background-image: url(https://images.unsplash.com/photo-1600633349333-eebb43d01e23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80);
-    height: 350px;
-    @include tablet {
-      height: 250px;
-    }
+  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1628090351166.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=Fk1U5QKxI%2BDRHyN9AsOikpVWIin7EO%2FoZ%2F%2Fpbz6pa1nGqvBdZXtcgW%2FLiel9Ppcge6YJm1Nbuuye2wavyuOac4M24JRXBQz7t%2FYE79r8%2BXNSL0LVxP%2BsaC6um3z4oT6oGL6LzxIklqX%2BTpYNwhjFtxWbXCZZkedCSHGx5QhkN%2FJeAAsApmvG2ul4ADrbVAvmuKVDxTM7%2Bwa8g5Cq44Nx4DK85gyILeXHlymT45T5Wd2%2FA4jiqGNsidnqfoKZjHxM96yOyfKnHtHPeospzrDMdt3nRHKeFeNAFEKM2ovv3NdF0lXQAnEyfJXVTjPSf8%2BqqNZZAI2GgDNELKEPVQPF%2BA%3D%3D);
+  height: 350px;
+  @include tablet {
+    height: 250px;
   }
+}
 
-.products-border {
+.category-border {
   border-bottom: 1px solid $gray-400;
   @include tablet {
     border-bottom: none;
   }
 }
-.products-list {
+.category-list {
   @include tablet {
     width: 100%;
     border-bottom: 1px solid $gray-400;
   }
-  .link-primary-hover {
+  .category-list-border {
     padding: 0.5rem 1rem;
     border-bottom: 3px solid transparent;
     @include tablet {
@@ -25,12 +25,12 @@
     }
     &:focus,
     &:hover {
-      border-bottom: 3px solid #009ddd;
-      color: #009ddd;
+      border-bottom: 3px solid #2c63a7;
+      color: #2c63a7;
       @include tablet {
-        background-color: #009ddd;
-        color: white;
         border-bottom: none;
+        background-color: #2c63a7;
+        color: white;
       }
       .categoryIcon-hover {
         transform: rotateY(180deg);
@@ -86,21 +86,15 @@
       height: 50px;
       line-height: 50px;
       &:hover {
-        background: #009ddd;
+        background: #2c63a7;
         color: #ffff;
       }
     }
   }
 }
 
-
-.search-img {
+.search-bg {
   background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1627184523170.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=O8t1aIvSzjShiC9lTLEOeJEblklzkiiGodwRP3Wt5MBnQUX4B0m68em%2BbDmufxoMcoV%2FDGkM%2BRdNBRc%2Bi2giLt5XA6izeXo2KwBTZBP48ZpQDuekhA272wv5pxeIIr3xTX1Qr1DPNGoX7CNfdP5gtZrXmNOAPuPgXEV9j%2BTyijce5649kDT%2FhiLY0mrlGmYL898TMq%2FLZvPMDZjB2c1t7ou1mh9ssyYO2WMY8YX%2B9veITf%2BfoP5ni3BuUn9v0jqwjzgWDIvnvPCw7BJJU6whR8zzwglartQdQGPNJCv7Me%2FCRvgG9wqxk%2B4SZpxaTepn1JUHGWTrHaPrC06NjWJuFw%3D%3D);
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
   width: 180px;
   height: 180px;
 }
-
-

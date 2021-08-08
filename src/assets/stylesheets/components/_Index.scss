@@ -1,7 +1,6 @@
 .hero-banner-bg {
-  background-image: url(https://images.unsplash.com/photo-1468386150076-13c9d6fff68b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80);
+  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1628090059397.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=aAknFyRqc7mSrTrM%2FlMDrVLx2jIj4vK3yuQHxX85xW8Wi9mXltNGGARtpV1eTRfN4xE2ZBSksJtIdF2OwjxEWS6QYo1t3aCB8Bu%2B5DP0eh9R5mCJjLnG%2FwYyV7WWGHKK586nUDzVQhl7mQofJ3ubrC8u4y1cSlQLcdaogriFfUouo%2F43djo9KVukuLNLe9Y2p9YTWOi%2F9WtA2BrHbCG8Pjf%2FIGpdCvkKP7OA%2FmXOG%2Bw0eMBPvIQldyP37cE%2FyuJNv1K6mtrkXXB1WhCFubFxM0rlB4VAbrFOjlo9OMzwmrgWT20k5wDS6toI51seJMPkVPya9X0GFT6rmlqYiIgzGg%3D%3D);
   height: 500px;
-  width: 100%;
   @include tablet {
     height: 300px;
   }
@@ -12,7 +11,7 @@
 }
 
 .second-banner-bg {
-  background-image: url(https://upload.cc/i1/2021/07/15/XJPyWn.png);
+  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1628090191681.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=JnzLnpMJdTBNFfU%2BpZhm5yuxjYzFNC9WHf3Z1%2BQFNj5k%2BKyc8BwADkt4QLHoMIiACtRRxbSbzHV9JKtu14S6q3SCmiAyiYktuEoOQOvWejqAXgC9nnpjKDznwfceQQUl6aYdeNyOUOmuVwNzVD2zSV9M0zFJgGpBdQirsz%2FDc5mcbzVut0xV2Jj%2Bh%2F4%2BWF8Efkz5odHn6M%2BLsowSjdfpFRApqx89PwWReLanjEXA8WfuGN12%2BTmKPU%2F6xhKopHV0sTWVKuIvOav1YroZpIYWXjc%2BcZz4UcBxGYKhpeLvkI0glMi6X1AXhk56rVLk3hZs15IRCumaNE%2B14Pw%2BT1Vztw%3D%3D);
   background-position: top center;
   background-size: cover;
   height: 350px;
@@ -22,10 +21,11 @@
   .second-banner-text {
     max-width: 450px;
     transition: linear 0.5s;
+    background-color: rgba(226, 226, 226, 0.4);
+    backdrop-filter: blur(7px); // 毛玻璃效果
     &:hover {
-      backdrop-filter: blur(5px); // 毛玻璃效果
       .btn-slide-right {
-        box-shadow: inset 500px 0 0 0 #f9bb00;
+        box-shadow: inset 500px 0 0 0 #f4cc1c;
         outline: none;
       }
     }
@@ -40,59 +40,44 @@
   overflow: hidden;
   position: relative;
   &:hover {
-    .selected-card-image {
+    .selected-card-img {
       transform: scale(1.15);
     }
     .selected-card-title::after {
       width: 100%;
     }
   }
-  .selected-card-image {
+  .selected-card-height-special {
     @include card-image-zoom-in;
-    height: 250px;
-    width: 100%;
+    height: 460px;
+    @include tablet {
+      height: 225px;
+    }
+  }
+  .selected-card-img {
+    @include card-image-zoom-in;
+    height: 225px;
   }
   .selected-card-title {
     position: absolute;
-    bottom: 10px;
-    right: 25px;
+    bottom: 0;
+    right: 5px;
     &::after {
       content: "";
       display: block;
       width: 0%;
-      height: 2px;
-      margin: 10px 0;
-      background-color: #f9bb00;
-      transition: width 0.5s 0.3s;
+      height: 3px;
+      margin: 2px 0;
+      background-color: #f4cc1c;
+      transition: width 0.5s;
     }
   }
   .selected-card-overlay {
     @include card-overlay;
   }
 }
-.selected-card-single {
-  height: 100%;
-  @include tablet {
-    height: 250px;
-    width: 100%;
-  }
-}
-
-// .overlay {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   content: "";
-//   opacity: 0.1;
-//   background: #000000;
-// }
 
 .feature {
-  border: 5px solid #009ddd;
-  border-radius: 15px;
-  margin-top: 3rem;
   &:hover {
     .feature-icon {
       & span {
@@ -101,30 +86,10 @@
     }
   }
   .feature-icon {
-    width: 100px;
-    height: 100px;
-    margin: -50px auto;
-    line-height: 100px;
-    border-radius: 50%;
-    position: relative;
-    color: #f9bb00;
+    color: #f4cc1c;
     & span {
       font-size: 65px;
       vertical-align: middle;
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-top: 5px solid #009ddd;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid transparent;
-      border-right: 5px solid #009ddd;
-      right: 0px;
-      top: 0px;
-      border-radius: 50%;
-      transform: rotate(-45deg);
     }
   }
 }
@@ -147,13 +112,13 @@
     height: 250px;
     width: 100%;
     @include card-image-zoom-in;
-    overflow: hidden;
   }
 }
+
 .topic::after {
   content: "";
   display: block;
   width: 60px;
-  border-bottom: 5px solid #009ddd;
+  border-bottom: 5px solid #2c63a7;
   margin-top: 10px;
 }

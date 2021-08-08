@@ -1,37 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
 
-// footer置底
-html, body {
-    height: 100%;
-    margin: 0;
-  }
-  body {
-    display: flex; /*使物件依序排列*/
-    flex-direction: column; /*使物件垂直排列*/
-    font-family: "Noto Sans TC", sans-serif;
-  }
-  .wrapper {
-    flex-grow: 1; /*可佔滿垂直剩餘的空間*/
-  }
+/*-----footer置底-----*/
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.wrapper {
+  flex-grow: 1; /*可佔滿垂直剩餘的空間*/
+}
+/*--------------------------------*/
 
-  
-  .link-hover:hover{
-    color: #009DDD;
-  }
-  
+.link-hover:hover {
+  color: #2c63a7;
+}
 
-
-.white-space{
+.white-space {
   white-space: pre;
 }
+
 .bg-primary-light {
-  background-color: rgba(0,157,221,0.05);
+  background-color: rgba(44, 99, 167, 0.05);
 }
+
 .bg-secondary-light {
-  background-color: rgba(249,187,0, 0.05);
+  background-color: rgba(244, 204, 28, 0.05);
 }
-.ck-editor__editable_inline { //文字編輯器的最小寬度
-  min-height: 300px;
+.ck-editor__editable_inline {
+  min-height: 300px; //文字編輯器的最小寬度
 }
 .cursor {
   cursor: pointer;
@@ -42,19 +43,34 @@ html, body {
 .bg-cover {
   @include bg-cover;
 }
+.bg-contain {
+  @include bg-contain;
+}
 .btn-slide-right {
-  @include btn-slide-right
-
+  @include btn-slide-right;
 }
-.title-border{
-  border-left: 2px solid #009DDD;
+.title-border {
+  border-left: 2px solid #2c63a7;
   padding-left: 5px;
-
 }
-.img-cover{
-  @include img-cover
+.img-cover {
+  @include img-cover;
 }
 
-.cursor-not-allowed{
+.cursor-not-allowed {
   cursor: not-allowed;
+}
+.form-input-bg {
+  background-color: rgba(44, 99, 167, 0.05);
+  &:focus {
+    background-color: transparent;
+  }
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.z-index {
+  z-index: 3;
 }

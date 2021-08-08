@@ -1,25 +1,23 @@
 <template>
-  <section class="container my-5 py-5 ">
+  <section class="container my-5">
     <h2 class="text-center mb-3 h1">
-      <span class="material-icons-outlined h1 align-middle text-primary">
-        help_outline </span
+      <span class="material-icons-outlined h1 align-middle text-primary"> help_outline </span
       >常見問題
     </h2>
     <div class="row justify-content-center">
       <div class="col-md-8" data-aos="zoom-in">
         <ul class="accordion list-unstyled" id="faq-accordion">
-           <li class="accordion-item mt-3 border-top">
+          <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
-                class="accordion-button
-            accordion-button-notCollaped accordion-button-focus"
+                class="accordion-button accordion-button-notCollaped accordion-button-focus"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseEight"
                 aria-expanded="false"
                 aria-controls="collapseEight"
               >
-                <span class="questions-list me-3">Q1</span>
+                <span class="questions-num me-3">Q1</span>
                 我可以等到成團後再付訂金嗎?
               </button>
             </h2>
@@ -33,7 +31,7 @@
               </div>
             </div>
           </li>
-          <li class="accordion-item mt-3">
+          <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
                 class="accordion-button accordion-button-notCollaped accordion-button-focus"
@@ -43,7 +41,7 @@
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                <span class="questions-list me-3">Q2</span>
+                <span class="questions-num me-3">Q2</span>
                 該在出發多久前預定行程？
               </button>
             </h2>
@@ -69,7 +67,7 @@
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                <span class="questions-list me-3">Q3</span>
+                <span class="questions-num me-3">Q3</span>
                 購買團體旅遊行程是否一定成行？
               </button>
             </h2>
@@ -88,15 +86,14 @@
           <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
-                class="accordion-button
-            accordion-button-notCollaped accordion-button-focus"
+                class="accordion-button accordion-button-notCollaped accordion-button-focus"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseThree"
                 aria-expanded="false"
                 aria-controls="collapseThree"
               >
-                <span class="questions-list me-3">Q4</span>
+                <span class="questions-num me-3">Q4</span>
                 我如何知道訂位結果呢？
               </button>
             </h2>
@@ -113,15 +110,14 @@
           <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
-                class="accordion-button
-            accordion-button-notCollaped accordion-button-focus"
+                class="accordion-button accordion-button-notCollaped accordion-button-focus"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseFour"
                 aria-expanded="false"
                 aria-controls="collapseFour"
               >
-                <span class="questions-list me-3">Q5</span>
+                <span class="questions-num me-3">Q5</span>
                 跟團有什麼好處呢？
               </button>
             </h2>
@@ -140,15 +136,14 @@
           <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
-                class="accordion-button
-            accordion-button-notCollaped accordion-button-focus"
+                class="accordion-button accordion-button-notCollaped accordion-button-focus"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseFive"
                 aria-expanded="false"
                 aria-controls="collapseFive"
               >
-                <span class="questions-list me-3">Q6</span>
+                <span class="questions-num me-3">Q6</span>
                 沒收到開票通知，怎麼辦？
               </button>
             </h2>
@@ -167,15 +162,14 @@
           <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
-                class="accordion-button
-            accordion-button-notCollaped accordion-button-focus"
+                class="accordion-button accordion-button-notCollaped accordion-button-focus"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseSeven"
                 aria-expanded="false"
                 aria-controls="collapseSeven"
               >
-                <span class="questions-list me-3">Q7</span>
+                <span class="questions-num me-3">Q7</span>
                 護照效期只剩3個月，可以出國嗎?
               </button>
             </h2>
@@ -186,22 +180,22 @@
             >
               <div class="accordion-body">
                 <p>
-                  依國際慣例，絕大部分國家或地區皆規定入境之外國旅客所持護照效期須在6個月以上，方可核准入境。如發現護照效期不足，請儘早辦理換發新護照。</p>
+                  依國際慣例，絕大部分國家或地區皆規定入境之外國旅客所持護照效期須在6個月以上，方可核准入境。如發現護照效期不足，請儘早辦理換發新護照。
+                </p>
               </div>
             </div>
           </li>
-           <li class="accordion-item mt-3 border-top">
+          <li class="accordion-item mt-3 border-top">
             <h2 class="accordion-header">
               <button
-                class="accordion-button
-            accordion-button-notCollaped accordion-button-focus"
+                class="accordion-button accordion-button-notCollaped accordion-button-focus"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseSeven"
                 aria-expanded="false"
                 aria-controls="collapseSeven"
               >
-                <span class="questions-list me-3">Q8</span>
+                <span class="questions-num me-3">Q8</span>
                 是否可中途脫隊，脫隊可退費嗎?
               </button>
             </h2>
@@ -214,7 +208,8 @@
                 <p>
                   團體行程需全程與團體同進同出，若需脫隊請於出發前提前告知，
                   如未於出發前提出需求者，恕不接受外站臨時脫隊；
-                  中途脫隊者，行程中所載明之餐食、景區門票、住宿、機位等團體行程，視同個人放棄，不另行退費。</p>
+                  中途脫隊者，行程中所載明之餐食、景區門票、住宿、機位等團體行程，視同個人放棄，不另行退費。
+                </p>
               </div>
             </div>
           </li>
@@ -223,3 +218,21 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  methods: {
+    goTop() {
+      if (window.pageYOffset > 100) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }
+    },
+  },
+  created() {
+    this.goTop();
+  },
+};
+</script>

@@ -1,44 +1,54 @@
-.product-img{
-    height: 470px;
+.product-img {
+  height: 499px;
+  width: 100%;
+}
+.product-banner {
+  height: 300px;
+}
+.product-icon { // 資訊icon
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  background-color: rgba(44, 99, 167, 0.6);
+  border-radius: 50%;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.product-border {
+  border-left: 5px solid #2C63A7;
+  padding-left: 5px;
+}
+
+.midline::before {
+  content: "───";
+}
+.midline::after {
+  content: "───";
+}
+
+.random-card {
+  &:hover {
+    .random-card-overlay {
+      opacity: 1;
+    }
+    .zoomIn-icon {
+      opacity: 1;
+    }
+  }
+  .random-card-image {
+    height: 250px;
     width: 100%;
-}
-.product-banner{
-    height: 300px; 
-}
-
-.product-border{
-    border-left:5px solid #009DDD ;
-    padding-left: 5px;
-}
-
-.midline::before{
-    content: "───";
-}
-.midline::after{
-    content: "───";
-}
-.random-card{
-    &:hover{
-        .random-card-overlay{
-            opacity: 1;
-        }
-        .zoomInIcon-bg{
-            opacity: 1;
-        }
-    }
-    .random-card-image{
-        height: 250px;
-        width: 100%;
-    }
-    .random-card-overlay{
-        @include card-overlay
-    }
-    .zoomInIcon-bg{
-        background-color:rgba(0,157,221,0.6);
-        border-radius: 50%;
-        height: 64px;
-        width: 64px;
-        line-height: 64px;
-        opacity: 0;
-    }
+  }
+  .random-card-overlay {
+    @include card-overlay;
+  }
+  .zoomIn-icon {
+    background-color: rgba(244, 204, 28, 0.6);
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    line-height: 64px;
+    opacity: 0;
+  }
 }

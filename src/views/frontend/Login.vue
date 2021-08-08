@@ -1,5 +1,5 @@
 <template>
-  <section class="login-bg d-flex align-items-center ">
+  <section class="login-bg bg-cover d-flex align-items-center">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
