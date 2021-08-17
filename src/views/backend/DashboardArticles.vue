@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <div class="text-end mt-5">
     <button
       type="button"
@@ -53,9 +53,9 @@
     :article="tempArticles"
     :isNew="isNew"
     @emit-article="updateArticle"
-  ></ArticleModal>
-  <DelModal ref="delModal" :item="tempArticles" @emit-delete="deleteArticle"></DelModal>
-  <Pagination :pages="pagination" @emit-page="getArticles"></Pagination>
+  />
+  <DelModal ref="delModal" :item="tempArticles" @emit-delete="deleteArticle" />
+  <Pagination :pages="pagination" @emit-page="getArticles" />
 </template>
 
 <script>

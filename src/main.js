@@ -19,10 +19,6 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-// defineRule('required', required);
-// defineRule('email', email);
-// defineRule('min', min);
-
 Object.keys(rules).forEach((rule) => {
   defineRule(rule, rules[rule]);
 });

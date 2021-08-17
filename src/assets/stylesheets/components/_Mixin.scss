@@ -34,10 +34,10 @@
   right: 0;
   bottom: 0;
   content: "";
-  opacity: 0;
-  backdrop-filter: brightness(50%);
+  opacity: 1;
+  backdrop-filter: brightness(70%);
   &:hover {
-    opacity: 1;
+    backdrop-filter: brightness(100%);
   }
   @content;
 }
@@ -79,6 +79,7 @@
   right: 0;
   bottom: 0;
   content: "";
-  opacity: 0.2;
+  opacity: 0.4;
   background: #000000;
 }
+

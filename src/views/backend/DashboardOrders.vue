@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <div class="table-responsive my-5">
     <table class="table table-hover">
       <thead>
@@ -59,9 +59,9 @@
         </tr>
       </tbody>
     </table>
-    <Pagination :pages="pagination" @emit-page="getOrders"></Pagination>
-    <OrderModal ref="orderModal" :order="tempOrder" @emit-change="updateOrder"></OrderModal>
-    <DelModal ref="delModal" :item="tempOrder" @emit-delete="deleteOrder"></DelModal>
+    <Pagination :pages="pagination" @emit-page="getOrders" />
+    <OrderModal ref="orderModal" :order="tempOrder" @emit-change="updateOrder" />
+    <DelModal ref="delModal" :item="tempOrder" @emit-delete="deleteOrder" />
   </div>
 </template>
 

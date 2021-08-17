@@ -11,24 +11,11 @@
 }
 
 .second-banner-bg {
-  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1628090191681.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=JnzLnpMJdTBNFfU%2BpZhm5yuxjYzFNC9WHf3Z1%2BQFNj5k%2BKyc8BwADkt4QLHoMIiACtRRxbSbzHV9JKtu14S6q3SCmiAyiYktuEoOQOvWejqAXgC9nnpjKDznwfceQQUl6aYdeNyOUOmuVwNzVD2zSV9M0zFJgGpBdQirsz%2FDc5mcbzVut0xV2Jj%2Bh%2F4%2BWF8Efkz5odHn6M%2BLsowSjdfpFRApqx89PwWReLanjEXA8WfuGN12%2BTmKPU%2F6xhKopHV0sTWVKuIvOav1YroZpIYWXjc%2BcZz4UcBxGYKhpeLvkI0glMi6X1AXhk56rVLk3hZs15IRCumaNE%2B14Pw%2BT1Vztw%3D%3D);
-  background-position: top center;
-  background-size: cover;
-  height: 350px;
+  background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1626853808471.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=An63RqojHYGTFOL7Hphwoe3Zc1r%2FUg9lLn%2FPNXx9ddVFXaCKnXhngcwYCAA9TJyTaufGuTQGyy%2FgHeoNqb%2BSrSyWLNHnWvSyerZsSFa4yMq%2BiNo7ufIEYKaNS3e8RQgAeJpfsjnDXcQQmB32yfeUT5qcVylutUQtP3j%2FZsy98O0IawwdqsEZ%2FiGrjmIhiy9MU03uQTB%2FsHojaeAMx1YIhaL0OsYo0BEFCRENRyQ2CxKmer3lktwdhPgwlRv1gCMY1qRnh3TaXoKVKaHx1JDie8tXKYBYAZgYmuZGRagq4PWYKQp1iwPeeyyFt4uKyec%2FPV4zVfvnvPsOPwr4O23qpQ%3D%3D);
+  background-attachment: fixed;
+  height: 250px;
   @include tablet {
-    height: 250px;
-  }
-  .second-banner-text {
-    max-width: 450px;
-    transition: linear 0.5s;
-    background-color: rgba(226, 226, 226, 0.4);
-    backdrop-filter: blur(7px); // 毛玻璃效果
-    &:hover {
-      .btn-slide-right {
-        box-shadow: inset 500px 0 0 0 #f4cc1c;
-        outline: none;
-      }
-    }
+    height: 200px;
   }
 }
 
@@ -43,20 +30,23 @@
     .selected-card-img {
       transform: scale(1.15);
     }
+    .selected-card-height-special{
+      transform: scale(1.15);
+    }
     .selected-card-title::after {
       width: 100%;
     }
   }
   .selected-card-height-special {
     @include card-image-zoom-in;
-    height: 460px;
+    height: 500px;
     @include tablet {
-      height: 225px;
+      height: 250px;
     }
   }
   .selected-card-img {
     @include card-image-zoom-in;
-    height: 225px;
+    height: 250px;
   }
   .selected-card-title {
     position: absolute;
@@ -77,33 +67,13 @@
   }
 }
 
-.feature {
-  &:hover {
-    .feature-icon {
-      & span {
-        animation: shake 0.2s linear infinite alternate;
-      }
-    }
-  }
-  .feature-icon {
-    color: #f4cc1c;
-    & span {
-      font-size: 65px;
-      vertical-align: middle;
-    }
-  }
-}
-@keyframes shake {
-  0% {
-    transform: rotate(-10deg);
-  }
-  100% {
-    transform: rotate(10deg);
-  }
-}
+
 
 .notice-card {
+  transition: all .3s ease-in-out;
   &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
     .notice-card-image {
       transform: scale(1.15);
     }
@@ -121,4 +91,13 @@
   width: 60px;
   border-bottom: 5px solid #2c63a7;
   margin-top: 10px;
+}
+
+.btn-outline-white{
+  border: 1px solid #fff;
+  color: #fff;
+  &:hover{
+    background-color: #f4cc1c;
+    border: 1px solid #f4cc1c;
+  }
 }

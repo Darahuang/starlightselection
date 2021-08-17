@@ -1,0 +1,27 @@
+.popular-card{
+  &:hover{
+    .popular-card-img{
+      transform: scale(1.15);
+    }
+  }
+}
+.popular-card-img{
+  @include card-image-zoom-in;
+  height: 225px;
+  width: 100%;
+  
+}
+
+.popular-card-overlay{
+  @include overlay;
+  &:hover{
+    background-color: transparent
+  }
+}
+
+.hover-up{
+  transition: all 0.5s;
+  &:hover {
+    transform: translateY(-10px);
+  }
+}

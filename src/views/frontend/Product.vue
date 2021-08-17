@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <section
     class="container-fluid product-banner bg-cover"
     :style="{ backgroundImage: `url(${product.imageUrl})` }"
@@ -118,7 +118,7 @@
           <div class="col-md-3" v-for="item in relatedProducts.slice(0, 4)" :key="item.id">
             <div class="random-card cursor shadow-sm" @click="toProduct(item.id)">
               <div class="position-relative">
-                <img :src="item.imageUrl" class="random-card-image" alt="產品圖片" srcset="" />
+                <img :src="item.imageUrl" class="random-card-image" alt="產品圖片" />
                 <div class="random-card-overlay d-flex justify-content-center align-items-center">
                   <!-- 手機以上的hover效果 -->
                   <div class="zoomIn-icon text-center d-none d-sm-block">
@@ -128,12 +128,15 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center mt-3">
+              <div class="p-3">
                 <h3 class="h4 text-primary">{{ item.title }}</h3>
-                <p>{{ $filters.dollarSignThousandth(item.price) }}</p>
+                <p class="mb-2">{{ item.description }}</p>
+                <p class="mb-0 text-danger text-end">
+                  {{ $filters.dollarSignThousandth(item.price) }}
+                </p>
                 <!-- 手機以下的查看更多的樣式 -->
                 <button
-                  class="btn btn-primary d-sm-none "
+                  class="btn btn-primary d-sm-none"
                   type="button"
                   @click="toProduct(item.id)"
                 >
@@ -152,6 +155,7 @@
 import emitter from '@/methods/emitter';
 import localStorageMethods from '@/methods/localStorageMethods';
 import Loading from '@/components/Loading.vue';
+import goTop from '@/methods/goTop';
 
 export default {
   data() {
@@ -183,7 +187,7 @@ export default {
               title: `${res.data.message}`,
             });
           }
-          this.goTop();
+          goTop();
           this.isLoading = false;
         })
         .catch(() => {
@@ -265,14 +269,6 @@ export default {
     },
     toProduct(id) {
       this.$router.push(`/product/${id}`);
-    },
-    goTop() {
-      if (window.pageYOffset > 100) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }
     },
   },
   computed: {

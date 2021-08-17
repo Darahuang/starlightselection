@@ -1,9 +1,9 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <section class="container my-5" v-if="!order.is_paid">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <CartStep :done="done"></CartStep>
+        <CartStep :done="done" />
         <h2 class="topic mb-3">訂單細節</h2>
         <div class="card mb-5 bg-primary-light">
           <div class="card-body">
@@ -12,12 +12,11 @@
                 <img
                   :src="item.product.imageUrl"
                   alt="產品圖片"
-                  srcset=""
                   style="width: 100px; height: 100px"
                 />
                 <div
                   class="ms-3 d-flex flex-column flex-sm-row
-                justify-content-sm-between align-items-start align-items-sm-center flex-grow-1"
+                  justify-content-sm-between align-items-start align-items-sm-center flex-grow-1"
                 >
                   <h3 class="h5">
                     {{ item.product.title }} *{{ item.qty }}{{ item.product.unit }}
@@ -32,8 +31,8 @@
           <div class="card-footer bg-transparent text-end">
             <span>訂單金額</span>
             <span class="fs-4 ms-3 text-primary fw-bold" v-if="order.total">
-              {{ $filters.dollarSignThousandth(order.total) }}</span
-            >
+              {{ $filters.dollarSignThousandth(order.total) }}
+            </span>
           </div>
         </div>
         <h2 class="topic mb-3">客戶資料</h2>
@@ -75,23 +74,30 @@
             <div class="user-bg bg-contain float-end bg-no-repeat"></div>
           </div>
         </div>
-        <button class="btn btn-primary w-25 py-2 float-end mt-3" type="button" @click="pay">
+        <button
+          class="btn btn-primary btn-slide-right border-0 py-2 px-5 float-end mt-3"
+          type="button"
+          @click="pay"
+        >
           確認付款
         </button>
       </div>
     </div>
   </section>
-  <section v-else class="container position-relative mt-5 py-5">
+  <section v-else class="container position-relative my-md-5">
     <div class="row justify-content-end">
       <div class="col-md-6 position-absolute bg-cover payment-bg"></div>
+      <div class="overlay-light"></div>
     </div>
     <div class="container">
-      <div class="row align-items-center" style=" height:100vh">
+      <div class="row align-items-center" style="height:100vh">
         <div class="col-md-6 z-index">
           <div class="me-0 me-sm-5">
-            <h2 class=" mb-3">
-              <span class="material-icons-outlined h2 align-middle paid-icon-color"> paid </span
-              >付款完成
+            <h2 class="mb-3">
+              <span class="material-icons-outlined h2 align-middle paid-icon-color">
+                paid
+              </span>
+              付款完成
             </h2>
             <h3 class="h5 mb-3">行程資訊</h3>
             <table class="table table-borderless">
@@ -141,15 +147,14 @@
                   <td>付款日</td>
                   <td>{{ $filters.date(order.paid_date) }}</td>
                 </tr>
-
                 <tr>
                   <td>付款方式</td>
                   <td>{{ order.user.payment_method }}</td>
                 </tr>
               </tbody>
             </table>
-            <router-link to="/products" class="btn btn-slide-right float-end border-0 px-5"
-              >挑選行程
+            <router-link to="/products" class="btn btn-slide-right float-end border-0 px-5">
+              挑選行程
             </router-link>
           </div>
         </div>
@@ -161,6 +166,7 @@
 <script>
 import Loading from '@/components/Loading.vue';
 import CartStep from '@/components/CartStep.vue';
+import goTop from '@/methods/goTop';
 
 export default {
   data() {
@@ -193,7 +199,7 @@ export default {
               title: `${res.data.message}`,
             });
           }
-          this.goTop();
+          goTop();
           this.isLoading = false;
         })
         .catch(() => {
@@ -225,14 +231,6 @@ export default {
           });
           this.isLoading = false;
         });
-    },
-    goTop() {
-      if (window.pageYOffset > 100) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }
     },
   },
   created() {

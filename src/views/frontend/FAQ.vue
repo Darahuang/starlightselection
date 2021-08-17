@@ -220,19 +220,11 @@
 </template>
 
 <script>
+import goTop from '@/methods/goTop';
+
 export default {
-  methods: {
-    goTop() {
-      if (window.pageYOffset > 100) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }
-    },
-  },
   created() {
-    this.goTop();
+    goTop();
   },
 };
 </script>

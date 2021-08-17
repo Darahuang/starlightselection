@@ -24,3 +24,28 @@
 .about-bg2 {
   background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/starlightselection/1628089828261.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=iXFMnpOe9xjDE8dHXdNVyzL1FrKrNzfVZEml0c0JYYaAKhAe2gncnN1RwIqtokceAfn8Mf2xC6DevytyQIbHIk4qGUsk%2BCiMiY6v%2FtXjYHP94t9YfFjP3gvgkQArRrgpMLPdMhobbaVwLJLzAUh75wvm5rd%2BAlJ%2BHNjSjS8eBYmQsqDOyoPYaj%2Fhgxxl4LdPAKN%2BJbbaxWPBKP%2FItQeyLECPvY3n9%2Frq4IuNTIqRQv12SiwA9j8YWlhBHaIVCwu%2FR5L2q9zVv%2Fn0O4wW5Va2TdUMAQuE7isDSN2HPN%2BDHKBJmrmVY4%2FkUVvwWqcanNnl4fXkr7SXBkNk1pydPzLX0A%3D%3D);
 }
+
+.feature {
+  &:hover {
+    .feature-icon {
+      & span {
+        animation: shake 0.2s linear infinite alternate;
+      }
+    }
+  }
+  .feature-icon {
+    color: #f4cc1c;
+    & span {
+      font-size: 65px;
+      vertical-align: middle;
+    }
+  }
+}
+@keyframes shake {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}

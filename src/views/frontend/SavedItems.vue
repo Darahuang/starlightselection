@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <section class="container my-5" v-if="myFavorite.length !== 0">
     <h2 class="text-center text-primary fw-bold h1 mb-4">
       <span class="material-icons-outlined h1 align-middle text-secondary">
@@ -78,6 +78,7 @@
 import emitter from '@/methods/emitter';
 import localStorageMethods from '@/methods/localStorageMethods';
 import Loading from '@/components/Loading.vue';
+import goTop from '@/methods/goTop';
 
 export default {
   data() {
@@ -128,20 +129,16 @@ export default {
           this.isLoading = false;
           this.loadingStatus.loadingItem = '';
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得購物車內容，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     toProduct(id) {
       this.$router.push(`/product/${id}`);
-    },
-    goTop() {
-      if (window.pageYOffset > 100) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }
     },
   },
   watch: {
@@ -153,7 +150,7 @@ export default {
     },
   },
   created() {
-    this.goTop();
+    goTop();
   },
 };
 </script>

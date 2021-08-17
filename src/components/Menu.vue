@@ -5,10 +5,8 @@
         <h1 class="h2 text-primary">
           <img
             src="../assets/imgs/svg_f_traffic_40_0nbg.svg"
-            class="logo-svg
-           d-inline-block align-text-top"
-            alt=""
-            srcset=""
+            class="logo-svg d-inline-block align-text-top"
+            alt="logo圖片"
           />
           WorldTrip
         </h1>
@@ -29,18 +27,18 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item" @click="toggle">
             <router-link to="/about" class="nav-link nav-link-primary nav-link-padding">
-              關於我們</router-link
-            >
+              關於我們
+            </router-link>
           </li>
           <li class="nav-item" @click="toggle">
-            <router-link to="/products" class="nav-link nav-link-primary nav-link-padding"
-              >行程列表</router-link
-            >
+            <router-link to="/products" class="nav-link nav-link-primary nav-link-padding">
+              行程列表
+            </router-link>
           </li>
           <li class="nav-item" @click="toggle">
             <router-link to="/faq" class="nav-link nav-link-primary nav-link-padding">
-              常見問題</router-link
-            >
+              常見問題
+            </router-link>
           </li>
         </ul>
         <div class="position-relative navbar-nav flex-row">
@@ -53,12 +51,11 @@
               shopping_cart
             </span>
             <span
-              class="rounded-circle bg-danger
-                     text-white px-2 shoppingCart-icon-position"
+              class="rounded-circle bg-danger text-white px-2 shoppingCart-icon-position"
               v-if="carts.carts"
             >
-              {{ carts.carts.length }}</span
-            >
+              {{ carts.carts.length }}
+            </span>
           </router-link>
           <router-link
             to="/savedItems"
@@ -73,8 +70,8 @@
               class="rounded-circle bg-danger text-white px-2 favorite-icon-position"
               v-if="myFavorite.length"
             >
-              {{ myFavorite.length }}</span
-            >
+              {{ myFavorite.length }}
+            </span>
           </router-link>
           <router-link
             to="/login"

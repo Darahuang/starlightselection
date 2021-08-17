@@ -1,9 +1,9 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <section class="container my-5" v-if="carts.total !== 0">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <CartStep :done="done"></CartStep>
+        <CartStep :done="done" />
         <div class="row">
           <div class="col-lg-8 mb-3 mb-lg-0">
             <a
@@ -18,13 +18,12 @@
                 <img
                   :src="item.product.imageUrl"
                   alt="產品圖片"
-                  srcset=""
                   style="width: 120px; height: 120px"
                   class="d-none d-sm-block"
                 />
                 <div class="flex-grow-1 ms-3 d-flex justify-content-between">
-                  <div class="">
-                    <h3 class="h5 ">{{ item.product.title }}</h3>
+                  <div>
+                    <h3 class="h5">{{ item.product.title }}</h3>
                     <small>{{ $filters.dollarSignThousandth(item.product.price) }}</small>
                     <small> * {{ item.qty }}{{ item.product.unit }}</small>
                     <div class="input-group input-group-sm my-3">
@@ -60,9 +59,9 @@
                   </div>
                   <div class="text-end ms-3">
                     <a href="#" class="text-danger" @click.prevent="deleteCart(item.id)">
-                      <span class="material-icons"> delete_forever</span></a
-                    >
-                    <p class="mt-5  h6">{{ $filters.dollarSignThousandth(item.final_total) }}</p>
+                      <span class="material-icons">delete_forever</span>
+                    </a>
+                    <p class="mt-5 h6">{{ $filters.dollarSignThousandth(item.final_total) }}</p>
                   </div>
                 </div>
               </div>
@@ -110,11 +109,7 @@
                 </div>
               </div>
               <div class="text-muted d-grid gap-2">
-                <router-link
-                  to="/checkout"
-                  class="btn btn-slide-right
-                 border-0 rounded-0"
-                >
+                <router-link to="/checkout" class="btn btn-slide-right border-0 rounded-0">
                   前往結帳
                 </router-link>
               </div>
@@ -142,6 +137,7 @@
 import emitter from '@/methods/emitter';
 import Loading from '@/components/Loading.vue';
 import CartStep from '@/components/CartStep.vue';
+import goTop from '@/methods/goTop';
 
 export default {
   data() {
@@ -166,15 +162,14 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.carts = res.data.data;
-            console.log(this.carts.carts);
           }
-          this.goTop();
+          goTop();
           this.isLoading = false;
         })
         .catch(() => {
           this.Toast.fire({
             icon: 'error',
-            title: '無法取得資料，請再次確認!',
+            title: '無法取得購物車內容，請再次確認!',
           });
           this.isLoading = false;
         });
@@ -304,14 +299,6 @@ export default {
           });
           this.isLoading = false;
         });
-    },
-    goTop() {
-      if (window.pageYOffset > 100) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }
     },
   },
   created() {

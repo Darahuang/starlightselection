@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <div class="text-end mt-5">
     <button type="button" class="btn btn-primary" @click="openModal('new')">建立新的產品</button>
   </div>
@@ -48,14 +48,14 @@
         </tr>
       </tbody>
     </table>
-    <Pagination :pages="pagination" @emit-page="getProducts"></Pagination>
+    <Pagination :pages="pagination" @emit-page="getProducts" />
     <ProductModal
       ref="productModal"
       :product="tempProduct"
       :isNew="isNew"
       @emit-product="updateProduct"
-    ></ProductModal>
-    <DelModal ref="delModal" :item="tempProduct" @emit-delete="deleteProduct"></DelModal>
+    />
+    <DelModal ref="delModal" :item="tempProduct" @emit-delete="deleteProduct" />
   </div>
 </template>
 

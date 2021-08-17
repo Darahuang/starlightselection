@@ -80,7 +80,7 @@
                       class="btn btn-outline-danger"
                       @click="tempArticle.tag.splice(key, 1)"
                     >
-                      <span class="material-icons-outlined ">
+                      <span class="material-icons-outlined">
                         close
                       </span>
                     </button>

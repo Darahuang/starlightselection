@@ -84,7 +84,10 @@ const routes = [
       },
     ],
   },
-  { path: '/:pathMatch(.*)*', component: () => import('../views/frontend/PathNotFound.vue') },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/frontend/PathNotFound.vue'),
+  },
 
 ];
 

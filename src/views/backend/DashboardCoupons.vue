@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <div class="text-end mt-5">
     <button
       type="button"
@@ -51,10 +51,14 @@
         </tr>
       </tbody>
     </table>
-    <Pagination :pages="pagination" @emit-page="getCoupons"></Pagination>
-    <CouponModal ref="couponModal" :coupon="tempCoupon" :isNew="isNew" @emit-coupon="updateCoupon">
-    </CouponModal>
-    <DelModal ref="delModal" :item="tempCoupon" @emit-delete="deleteCoupon"></DelModal>
+    <Pagination :pages="pagination" @emit-page="getCoupons" />
+    <CouponModal
+      ref="couponModal"
+      :coupon="tempCoupon"
+      :isNew="isNew"
+      @emit-coupon="updateCoupon"
+    />
+    <DelModal ref="delModal" :item="tempCoupon" @emit-delete="deleteCoupon" />
   </div>
 </template>
 

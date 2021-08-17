@@ -24,7 +24,8 @@
       border-bottom: none;
     }
     &:focus,
-    &:hover {
+    &:hover,
+    &-active {
       border-bottom: 3px solid #2c63a7;
       color: #2c63a7;
       @include tablet {

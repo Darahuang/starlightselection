@@ -1,7 +1,6 @@
 <template>
   <div v-if="show">
-    <button type="button" class="btn btn-goTop btn-hover position-fixed"
-     @click="gotop">
+    <button type="button" class="btn btn-goTop btn-hover position-fixed" @click="gotop">
       <span class="material-icons-outlined fs-1">
         expand_less
       </span>
@@ -10,6 +9,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {

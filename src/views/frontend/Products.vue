@@ -1,5 +1,5 @@
 <template>
-  <Loading :isLoading="isLoading"></Loading>
+  <Loading :isLoading="isLoading" />
   <div class="container-fluid products-banner-bg bg-cover"></div>
   <section class="container my-5">
     <div class="row justify-content-center">
@@ -12,7 +12,7 @@
             <a
               href="#"
               class="text-decoration-none category-list-border link-dark
-                    h3 d-block mb-0 py-2"
+                     h3 d-block mb-0 py-2"
               @click.prevent="(category = ''), (searchInput = '')"
             >
               <span class="material-icons-outlined categoryIcon-hover">travel_explore</span>
@@ -24,17 +24,19 @@
               href="#"
               class="text-decoration-none link-dark category-list-border h3 d-block mb-0 py-2"
               @click.prevent="(category = '亞洲'), (searchInput = '')"
+              :class="{ 'category-list-border-active': category === '亞洲' }"
             >
               <span class="material-icons-outlined categoryIcon-hover"> festival </span>
-              亞洲</a
-            >
+              亞洲
+            </a>
           </li>
           <li class="category-list text-center">
             <a
               href="#"
               class="text-decoration-none link-dark category-list-border
-                h3 mb-0 py-2 d-block "
+                     h3 mb-0 py-2 d-block "
               @click.prevent="(category = '歐洲'), (searchInput = '')"
+              :class="{ 'category-list-border-active': category === '歐洲' }"
             >
               <span class="material-icons-outlined categoryIcon-hover"> gite </span> 歐洲
             </a>
@@ -43,14 +45,15 @@
             <a
               href="#"
               class="text-decoration-none link-dark category-list-border
-                    h3 mb-0 py-2 d-block"
+                     h3 mb-0 py-2 d-block"
               @click.prevent="(category = '美洲'), (searchInput = '')"
+              :class="{ 'category-list-border-active': category === '美洲' }"
             >
               <span class="material-icons-outlined categoryIcon-hover">
                 luggage
               </span>
-              美洲</a
-            >
+              美洲
+            </a>
           </li>
           <li class="category-list text-center">
             <a
@@ -58,6 +61,7 @@
               class="text-decoration-none link-dark category-list-border
                      h3 mb-0 py-2 d-block"
               @click.prevent="(category = '大洋洲'), (searchInput = '')"
+              :class="{ 'category-list-border-active': category === '大洋洲' }"
             >
               <span class="material-icons-outlined categoryIcon-hover"> sailing </span>
               大洋洲
@@ -67,7 +71,15 @@
         <div class="mb-3 clearfix">
           <input
             type="search"
-            class="form-control w-25 float-end"
+            class="form-control w-25 float-end d-none d-sm-block"
+            id="search"
+            placeholder="請輸入類別 ex:亞洲"
+            v-model.lazy="searchInput"
+            @input="category = ''"
+          />
+          <input
+            type="search"
+            class="form-control w-100 float-end d-block d-sm-none"
             id="search"
             placeholder="請輸入類別 ex:亞洲"
             v-model.lazy="searchInput"
@@ -92,7 +104,7 @@
                 <!-- 手機以上的hover效果 -->
                 <ul
                   class="social-icon justify-content-center text-center list-unstyled
-                        d-none d-sm-flex"
+                         d-none d-sm-flex"
                 >
                   <li>
                     <a href="#" class="link-dark" @click.prevent="addToFavorite(item)">
@@ -139,15 +151,15 @@
                 </div>
               </div>
               <span class="badge bg-secondary badge-position px-3 py-2 z-index">
-                {{ item.category }}</span
-              >
+                {{ item.category }}
+              </span>
               <div class="card-body text-center" @click="toProduct(item.id)">
                 <h2 class="card-title h4">{{ item.title }}</h2>
                 <p class="card-text">{{ item.description }}</p>
                 <p class="h5 text-danger">{{ $filters.dollarSignThousandth(item.price) }}</p>
               </div>
               <!-- 手機以下加入購物車樣式 -->
-              <div class="mt-2 text-center d-block d-sm-none">
+              <div class="mb-3 text-center d-block d-sm-none">
                 <button
                   type="button"
                   class="btn btn-slide-right col-6 p-2 border-0"
@@ -180,6 +192,7 @@
 import emitter from '@/methods/emitter';
 import localStorageMethods from '@/methods/localStorageMethods';
 import Loading from '@/components/Loading.vue';
+import goTop from '@/methods/goTop';
 
 export default {
   data() {
@@ -207,17 +220,25 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.products = res.data.products;
+            const { categoryName } = this.$route.params;
+            if (categoryName) {
+              this.category = categoryName;
+            }
           } else {
             this.Toast.fire({
               icon: 'error',
               title: `${res.data.message}`,
             });
           }
-          this.goTop();
+          goTop();
           this.isLoading = false;
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.Toast.fire({
+            icon: 'error',
+            title: '無法取得產品，請再次確認!',
+          });
+          this.isLoading = false;
         });
     },
     addToCart(id, qty = 1) {
@@ -273,14 +294,6 @@ export default {
     },
     toProduct(id) {
       this.$router.push(`/product/${id}`);
-    },
-    goTop() {
-      if (window.pageYOffset > 100) {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-      }
     },
   },
   computed: {

@@ -145,7 +145,8 @@
                   rows="3"
                   placeholder="請輸入產品描述"
                   v-model="tempProduct.description"
-                ></textarea>
+                >
+                </textarea>
               </div>
               <div class="mb-3">
                 <label for="content" class="form-label">行程安排</label>
@@ -155,7 +156,8 @@
                   rows="7"
                   placeholder="請輸入景點行程"
                   v-model="tempProduct.content"
-                ></textarea>
+                >
+                </textarea>
               </div>
               <div class="mb-3">
                 <label for="condition" class="form-label">成團條件</label>
@@ -165,7 +167,8 @@
                   rows="3"
                   placeholder="請輸入成團條件"
                   v-model="tempProduct.condition"
-                ></textarea>
+                >
+                </textarea>
               </div>
               <div class="form-check">
                 <input
