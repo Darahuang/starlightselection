@@ -12,12 +12,7 @@
   
 }
 
-.popular-card-overlay{
-  @include overlay;
-  &:hover{
-    background-color: transparent
-  }
-}
+
 
 .hover-up{
   transition: all 0.5s;

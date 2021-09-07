@@ -1,16 +1,17 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white">
     <div class="container-fluid">
-      <router-link class="navbar-brand font-logo d-block nav-link" to="/" @click="toggle">
-        <h1 class="h2 text-primary">
-          <img
-            src="../assets/imgs/svg_f_traffic_40_0nbg.svg"
-            class="logo-svg d-inline-block align-text-top"
-            alt="logo圖片"
-          />
-          WorldTrip
-        </h1>
-      </router-link>
+      <h1 class="mb-0">
+          <router-link class="navbar-brand font-logo d-block nav-link fs-2
+          text-primary" to="/" @click="toggle">
+            <img
+              src="../assets/imgs/svg_f_traffic_40_0nbg.svg"
+              class="logo-svg d-inline-block align-middle"
+              alt="logo圖片"
+            />
+            WorldTrip
+          </router-link>
+      </h1>
       <button
         class="navbar-toggler"
         type="button"

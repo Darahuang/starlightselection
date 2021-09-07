@@ -1,19 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
 
-/*-----footer置底-----*/
-html,
-body {
-  height: 100%;
-  margin: 0;
+/*-----sticky-footer-----*/
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 body {
-  display: flex;
-  flex-direction: column;
-  font-family: "Noto Sans TC", sans-serif;
+  /* Margin bottom by footer height */
+  margin-bottom: 270px;
 }
-.wrapper {
-  flex-grow: 1; /*可佔滿垂直剩餘的空間*/
+.wrapper{
+  padding-bottom: 30px;
 }
+.sticky-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 270px;
+}
+
 /*--------------------------------*/
 
 .link-hover:hover {

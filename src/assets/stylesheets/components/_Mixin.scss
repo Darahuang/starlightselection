@@ -16,6 +16,11 @@
   }
 }
 
+@mixin iphone5 {
+  @media (max-width: 320px) {
+    @content;
+  }
+}
 @mixin bg-cover {
   background-position: center;
   background-size: cover;

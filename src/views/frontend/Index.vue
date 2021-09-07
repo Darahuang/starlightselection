@@ -1,25 +1,6 @@
 <template>
   <Loading :isLoading="isLoading" />
-  <header class="container-fluid hero-banner-bg bg-cover">
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <div class="hero-banner-text p-3">
-        <h3 class="text-center fw-bold">
-          準備與我們一起去旅行嗎?
-        </h3>
-        <figure>
-          <blockquote class="blockquote">
-            <p>人之所以愛旅行，不是為了抵達目的地，而是為了享受旅途中的種種樂趣。</p>
-          </blockquote>
-          <figcaption class="blockquote-footer text-end text-dark mb-0">
-            <cite title="Source Title">歌德</cite>
-          </figcaption>
-        </figure>
-        <router-link to="/products" class="btn float-end btn-slide-right border-0">
-          查看行程
-        </router-link>
-      </div>
-    </div>
-  </header>
+  <SwiperBanner :products="products" @emit-product="toProduct" />
   <Category />
   <section class="container mt-6">
     <h2 class="topic mb-4">精選行程</h2>
@@ -119,7 +100,7 @@
     </ul>
   </section>
   <SwiperProducts :products="products" @emit-product="toProduct" />
-  <SwiperCustomer />
+
   <section class="container my-6">
     <h2 class="topic mb-4">旅遊須知</h2>
     <ul class="row list-unstyled">
@@ -140,7 +121,7 @@
           </div>
           <div class="p-3">
             <span
-              class="badge bg-secondary p-2 mt-2 me-2"
+              class="badge bg-secondary p-2 mt-2 me-2 text-dark"
               v-for="(item, index) in article.tag"
               :key="index"
               >{{ item }}</span
@@ -183,8 +164,9 @@
 </template>
 
 <script>
-import SwiperCustomer from '@/components/SwiperCustomer.vue';
+
 import SwiperProducts from '@/components/SwiperProducts.vue';
+import SwiperBanner from '@/components/SwiperBanner.vue';
 import Category from '@/components/Category.vue';
 import Loading from '@/components/Loading.vue';
 import goTop from '@/methods/goTop';
@@ -199,8 +181,9 @@ export default {
     };
   },
   components: {
-    SwiperCustomer,
+
     SwiperProducts,
+    SwiperBanner,
     Category,
     Loading,
   },

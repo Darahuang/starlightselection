@@ -92,7 +92,7 @@
     <div class="container">
       <div class="row align-items-center" style="height:100vh">
         <div class="col-md-6 z-index">
-          <div class="me-0 me-sm-5">
+          <div class="me-0 me-sm-5 py-3 py-md-0">
             <h2 class="mb-3">
               <span class="material-icons-outlined h2 align-middle paid-icon-color">
                 paid
@@ -153,7 +153,8 @@
                 </tr>
               </tbody>
             </table>
-            <router-link to="/products" class="btn btn-slide-right float-end border-0 px-5">
+            <router-link to="/products" class="btn btn-slide-right float-end border-0  px-md-5
+             btn-position">
               挑選行程
             </router-link>
           </div>

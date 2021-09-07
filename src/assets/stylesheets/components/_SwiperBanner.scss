@@ -1,0 +1,11 @@
+.banner-img-height{
+  height: 550px;
+  width: 100%;
+  @include media-breakpoint-down(sm) {
+    height: 250px;
+  }
+}
+.banner-img-position{
+  object-fit: cover;
+  object-position: top;
+}

@@ -29,7 +29,9 @@
       </div>
     </div>
   </section>
-  <section class="container mt-6" data-aos="fade-down">
+
+   <SwiperCustomer />
+   <section class="container mt-6" data-aos="fade-down">
     <div class="row justify-content-center">
       <div class="col-md-10">
         <h3 class="fw-bold mb-3">經營指針</h3>
@@ -115,6 +117,7 @@
 
 <script>
 import goTop from '@/methods/goTop';
+import SwiperCustomer from '@/components/SwiperCustomer.vue';
 
 export default {
   data() {
@@ -123,6 +126,9 @@ export default {
     };
   },
   inject: ['Toast'],
+  components: {
+    SwiperCustomer,
+  },
   methods: {
     subscribe() {
       this.Toast.fire({

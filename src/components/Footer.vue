@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-primary-light footer">
+  <footer class="bg-primary-light sticky-footer">
     <div class="container py-4">
       <div class="row">
         <div class="col-md-4 d-none d-md-block">
@@ -135,7 +135,7 @@
         </div>
       </div>
     </div>
-    <div class="p-3 text-center bg-secondary">
+    <div class=" text-center bg-secondary p-3">
       <p class="mb-0 fw-bold">資料、圖片來源皆來自網路，僅用來做為學習用途。</p>
     </div>
   </footer>

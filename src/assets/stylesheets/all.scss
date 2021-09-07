@@ -1,12 +1,13 @@
 @import "~bootstrap/scss/functions";
 @import "../stylesheets/helpers/variables";
+@import "../stylesheets/helpers/utilities";
 @import "~bootstrap/scss/mixins";
 
 @import "~bootstrap/scss/bootstrap";
 
 
 @import "./components/Mixin";
-@import "./components/Utilities";
+@import "./components/Costomize";
 @import "./components/Menu";
 @import "./components/Index";
 @import "./components/Login";
@@ -21,6 +22,7 @@
 @import "./components/Article";
 @import "./components/GoTop";
 @import "./components/PathNotFound";
-@import "./components/Swiper";
+@import "./components/SwiperCustomer";
 @import "./components/CartStep";
-@import "./components/SwiperProducts"
+@import "./components/SwiperProducts";
+@import "./components/SwiperBanner"

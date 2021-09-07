@@ -1,7 +1,9 @@
 <template>
-  <section class="p-4 bg-primary-light mt-6">
+  <section class="p-4  mt-6 bg-primary-light">
     <div class="container">
-      <h2 class="topic mb-4">客戶好評</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <h3 class="fw-bold mb-3">客戶好評</h3>
       <swiper
         :slidesPerView="1"
         :spaceBetween="10"
@@ -22,7 +24,7 @@
         class="mySwiper"
       >
         <swiper-slide v-for="(item, index) in users" :key="index">
-          <div class="position-relative customer-img">
+          <div class="position-relative customer-img ">
             <img :src="item.imageUrl" class="rounded-pill img-fluid" alt="客戶圖片" />
             <div class="bg-secondary customer-icon text-center">
               <span class="material-icons-outlined align-middle">
@@ -53,6 +55,9 @@
           </div>
         </swiper-slide>
       </swiper>
+        </div>
+      </div>
+
     </div>
   </section>
 </template>
